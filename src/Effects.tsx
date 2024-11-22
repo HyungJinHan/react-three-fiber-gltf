@@ -48,7 +48,7 @@ export default function Effects(props: {
         // visibleEdgeColor={0xffffff} // white
         hiddenEdgeColor={0x0b0b0b} // gray
         blur
-        width={size.width * 5}
+        // width={size.width * 5}
         edgeStrength={100}
       />
       <TiltShift2 samples={5} blur={0.03} />
