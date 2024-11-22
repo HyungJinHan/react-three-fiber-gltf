@@ -2,6 +2,7 @@ import { Mask, Text, useMask } from "@react-three/drei";
 
 export const Description = ({ value, currency = "$", ...props }) => {
   const stencil = useMask(1);
+
   return (
     <group {...props}>
       <Text
@@ -15,6 +16,7 @@ export const Description = ({ value, currency = "$", ...props }) => {
         {value}
         <meshBasicMaterial {...stencil} />
       </Text>
+
       <Mask id={1}>
         <planeGeometry args={[15, 1.8]} />
       </Mask>
