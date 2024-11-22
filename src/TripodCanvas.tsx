@@ -27,11 +27,11 @@ export const TripodCanvas = () => {
       camera={{ position: [0, 1, 6], fov: 25, near: 1, far: 20 }}>
       <Light />
       <Sky />
-      <Bvh firstHitOnly verbose={true}>
+      <Bvh firstHitOnly>
         <Selection>
           <Effects hovered={hovered} hover={hover} />
           <Tripod
-            rotation={[0, 0, 0]}
+            rotation={[0, 0.1, 0]}
             scale={4}
             position={[0.7, -0.75, 0.5]}
             height={"100vh"}

@@ -39,7 +39,7 @@ export default function Effects(props: {
         halfRes
         aoSamples={5}
         aoRadius={0.4}
-        distanceFalloff={0.75}
+        distanceFalloff={0.5}
         intensity={2}
       />
       <Outline

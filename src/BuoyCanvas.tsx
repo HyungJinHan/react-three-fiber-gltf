@@ -16,7 +16,7 @@ export const BuoyCanvas = () => {
       camera={{ position: [0, 1, 6], fov: 25, near: 1, far: 20 }}>
       <ambientLight intensity={1.5 * Math.PI} />
       <Sky />
-      <Bvh firstHitOnly verbose={true}>
+      <Bvh firstHitOnly>
         <Selection>
           <Effects hovered={hovered} hover={hover} />
           <Buoy
