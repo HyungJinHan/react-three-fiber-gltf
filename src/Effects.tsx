@@ -7,11 +7,9 @@ import {
   ToneMapping,
 } from "@react-three/postprocessing";
 import { easing } from "maath";
+import { IHover } from "./interfaces";
 
-export default function Effects(props: {
-  hovered: null;
-  hover: React.Dispatch<React.SetStateAction<null>>;
-}) {
+export default function Effects(props: IHover) {
   const { size } = useThree();
 
   useFrame((state, delta) => {
@@ -25,7 +23,7 @@ export default function Effects(props: {
       0.3,
       delta
     );
-    state.camera.lookAt(state.camera.position.x * 0.9, 0, -4);
+    state.camera.lookAt(state.camera.position.x * 0.2, 0, -1);
   });
 
   return (

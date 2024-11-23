@@ -1,13 +1,11 @@
 import { Bvh, Sky } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Selection } from "@react-three/postprocessing";
-import { useState } from "react";
 import { Buoy } from "./Buoy";
 import Effects from "./Effects";
+import { ICanvasProps } from "./interfaces";
 
-export const BuoyCanvas = () => {
-  const [hovered, hover] = useState(null);
-
+export const BuoyCanvas = (props: ICanvasProps) => {
   return (
     <Canvas
       flat
@@ -18,15 +16,18 @@ export const BuoyCanvas = () => {
       <Sky />
       <Bvh firstHitOnly>
         <Selection>
-          <Effects hovered={hovered} hover={hover} />
+          <Effects hovered={props.hovered} hover={props.hover} />
           <Buoy
-            rotation={[0.1, Math.PI / 5, 0]}
-            scale={1.8}
-            position={[-1.8, -0.2, 2]}
+            desciptionProps={props.desciptionProps}
+            group={{
+              scale: 1.8,
+              position: [-1.8, -0.2, 2],
+              rotation: [0.1, Math.PI / 5, 0],
+            }}
             height={"100vh"}
             width={"100%"}
-            hovered={hovered}
-            hover={hover}
+            hovered={props.hovered}
+            hover={props.hover}
           />
         </Selection>
       </Bvh>

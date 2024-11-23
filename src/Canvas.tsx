@@ -3,18 +3,13 @@ import { Link, useLocation } from "react-router-dom";
 import { BuoyCanvas } from "./BuoyCanvas";
 import { TripodCanvas } from "./TripodCanvas";
 
-const Light = () => {
-  return (
-    <mesh>
-      <directionalLight intensity={1.2} position={[20, -12, 0]} castShadow />
-      <directionalLight intensity={1.2} position={[-20, -12, 0]} castShadow />
-      <directionalLight intensity={1.2} position={[0, -5, 30]} castShadow />
-    </mesh>
-  );
+const desciptionProps = {
+  position: [-1.8, 0.1, -1],
+  rotation: [0, 0.3, 0],
 };
 
 export const Canvas = () => {
-  const [hovered, hover] = useState(null);
+  const [hovered, hover] = useState("");
   const location = useLocation();
 
   return (
@@ -58,7 +53,19 @@ export const Canvas = () => {
         </div>
       </div>
 
-      {location.pathname === "/tripod" ? <TripodCanvas /> : <BuoyCanvas />}
+      {location.pathname === "/tripod" ? (
+        <TripodCanvas
+          desciptionProps={desciptionProps}
+          hovered={hovered}
+          hover={hover}
+        />
+      ) : (
+        <BuoyCanvas
+          desciptionProps={desciptionProps}
+          hovered={hovered}
+          hover={hover}
+        />
+      )}
     </>
   );
 };

@@ -1,23 +1,23 @@
-import { Bvh, Sky } from "@react-three/drei";
+import { Bvh, Sky, useCursor } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Selection } from "@react-three/postprocessing";
-import { useState } from "react";
 import Effects from "./Effects";
 import { Tripod } from "./Tripod";
+import { ICanvasProps } from "./interfaces";
 
 const Light = () => {
   return (
     <mesh>
-      <directionalLight intensity={1.2} position={[20, -12, 0]} castShadow />
-      <directionalLight intensity={1.2} position={[-20, -12, 0]} castShadow />
+      {/* <directionalLight intensity={1.2} position={[20, -12, 0]} castShadow /> */}
+      <directionalLight intensity={1.2} position={[20, 0, 5]} castShadow />
       <directionalLight intensity={1.2} position={[0, -5, 30]} castShadow />
-      <directionalLight intensity={1.2} position={[10, -1, 10]} castShadow />
+      {/* <directionalLight intensity={1.2} position={[10, -1, 10]} castShadow /> */}
     </mesh>
   );
 };
 
-export const TripodCanvas = () => {
-  const [hovered, hover] = useState(null);
+export const TripodCanvas = (props: ICanvasProps) => {
+  useCursor(true);
 
   return (
     <Canvas
@@ -29,15 +29,18 @@ export const TripodCanvas = () => {
       <Sky />
       <Bvh firstHitOnly>
         <Selection>
-          <Effects hovered={hovered} hover={hover} />
+          <Effects hovered={props.hovered} hover={props.hover} />
           <Tripod
-            rotation={[0, 0.1, 0]}
-            scale={4}
-            position={[0.7, -0.75, 0.5]}
+            desciptionProps={props.desciptionProps}
+            group={{
+              scale: 4.5,
+              position: [0.9, -0.75, 0.5],
+              rotation: [0, 0.1, 0],
+            }}
             height={"100vh"}
             width={"100%"}
-            hovered={hovered}
-            hover={hover}
+            hovered={props.hovered}
+            hover={props.hover}
           />
         </Selection>
       </Bvh>
