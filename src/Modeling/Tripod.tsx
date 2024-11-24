@@ -2,10 +2,12 @@ import { Text, useEnvironment, useGLTF } from "@react-three/drei";
 import { Select } from "@react-three/postprocessing";
 import { debounce } from "lodash";
 import { SetStateAction, useCallback } from "react";
+import { IGroupProps, IModeling, IObjectProps } from "../interfaces";
 import { Description } from "./Description";
-import { IGroupProps, IModeling, IObjectProps } from "./interfaces";
 
 const modelingPath = "/modeling/tripod/original/tripod-draco.glb";
+// const modelingPath = "/modeling/tripod/fix/tripod-draco.glb";
+
 const groupProps: IGroupProps["group"] = {
   scale: 0.001,
   position: [0, -0.94, 0],
@@ -38,7 +40,7 @@ export function Tripod(props: IObjectProps) {
 
   return (
     <>
-      <group {...props.group} dispose={null}>
+      <group {...props.modeling} dispose={null}>
         <Select
           enabled={props.hovered === "트라이포드 콤보"}
           onPointerOver={over("트라이포드 콤보")}
@@ -74,7 +76,7 @@ export function Tripod(props: IObjectProps) {
               geometry={nodes.body.geometry}
               material={materials.body}
               rotation={[Math.PI, 0, Math.PI]}
-              material-envMap={env}
+              // material-envMap={env}
             />
             <mesh
               castShadow
@@ -100,17 +102,18 @@ export function Tripod(props: IObjectProps) {
               rotation={[Math.PI, 0, Math.PI]}
               material-envMap={env}
             />
-
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.cover.geometry}
-              material={materials.cover}
-              rotation={[Math.PI, 0.8, Math.PI]}
-              // scale={groupProps.scale} position={groupProps.position}
-            />
           </group>
         </Select>
+
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.cover.geometry}
+          material={materials.cover}
+          rotation={[Math.PI, 0.8, Math.PI]}
+          scale={0.001}
+          position={[0, -0.94, 0]}
+        />
 
         <Select
           enabled={props.hovered === "용존산소 단일 센서"}
@@ -205,13 +208,7 @@ export function Tripod(props: IObjectProps) {
         {props.hovered ? props.hovered : "트라이포드 센서"}
       </Text>
 
-      <Description
-        value={descripiton}
-        group={{
-          position: [-1.8, 0.1, -1],
-          rotation: [0, 0.3, 0],
-        }}
-      />
+      <Description value={descripiton} group={props.desciption} />
     </>
   );
 }

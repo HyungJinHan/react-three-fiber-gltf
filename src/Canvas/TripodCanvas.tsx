@@ -1,29 +1,36 @@
 import { Bvh, Sky } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Selection } from "@react-three/postprocessing";
-import { Buoy } from "./Buoy";
-import Effects from "./Effects";
-import { ICanvasProps } from "./interfaces";
+import Effects from "../Control/Effects";
+import { Tripod } from "../Modeling/Tripod";
+import { ICanvasProps } from "../interfaces";
 
-export const BuoyCanvas = (props: ICanvasProps) => {
+const Light = () => {
+  return (
+    <mesh>
+      {/* <directionalLight intensity={1.2} position={[20, -12, 0]} castShadow /> */}
+      <directionalLight intensity={1.2} position={[20, 0, 5]} castShadow />
+      <directionalLight intensity={1.2} position={[0, -5, 30]} castShadow />
+      {/* <directionalLight intensity={1.2} position={[10, 5, 5]} castShadow /> */}
+    </mesh>
+  );
+};
+
+export const TripodCanvas = (props: ICanvasProps) => {
   return (
     <Canvas
       flat
       dpr={[1, 1.5]}
       gl={{ antialias: false }}
       camera={{ position: [0, 1, 6], fov: 25, near: 1, far: 20 }}>
-      <ambientLight intensity={1.5 * Math.PI} />
+      <Light />
       <Sky />
       <Bvh firstHitOnly>
         <Selection>
           <Effects hovered={props.hovered} hover={props.hover} />
-          <Buoy
-            desciptionProps={props.desciptionProps}
-            group={{
-              scale: 1.8,
-              position: [-1.8, -0.2, 2],
-              rotation: [0.1, Math.PI / 5, 0],
-            }}
+          <Tripod
+            desciption={props.desciptionProps}
+            modeling={props.modelingProps}
             height={"100vh"}
             width={"100%"}
             hovered={props.hovered}

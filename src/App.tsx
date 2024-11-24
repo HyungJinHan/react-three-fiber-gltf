@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Canvas } from "./Canvas";
+import { Canvas } from "./Control/Canvas";
 
 export const App = () => {
   return (

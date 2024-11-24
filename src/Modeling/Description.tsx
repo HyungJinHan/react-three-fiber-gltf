@@ -1,5 +1,5 @@
 import { Mask, Text, useMask } from "@react-three/drei";
-import { IDescriptionProps } from "./interfaces";
+import { IDescriptionProps } from "../interfaces";
 
 export const Description = (props: IDescriptionProps) => {
   const stencil = useMask(1);

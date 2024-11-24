@@ -3,8 +3,8 @@ import { Select } from "@react-three/postprocessing";
 import { debounce } from "lodash";
 import { SetStateAction, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { IModeling, IObjectProps } from "../interfaces";
 import { Description } from "./Description";
-import { IModeling, IObjectProps } from "./interfaces";
 
 const modelingPath = "/modeling/buoy/buoy-draco.glb";
 
@@ -39,7 +39,7 @@ export function Buoy(props: IObjectProps) {
 
   return (
     <>
-      <group {...props.group} dispose={null}>
+      <group {...props.modeling} dispose={null}>
         <mesh
           castShadow
           receiveShadow
@@ -180,13 +180,7 @@ export function Buoy(props: IObjectProps) {
         {props.hovered ? props.hovered : "스마트 부표"}
       </Text>
 
-      <Description
-        value={descripiton}
-        group={{
-          position: [-1.8, 0.1, -1],
-          rotation: [0, 0.3, 0],
-        }}
-      />
+      <Description value={descripiton} group={props.desciption} />
     </>
   );
 }

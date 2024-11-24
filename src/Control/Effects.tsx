@@ -1,4 +1,4 @@
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import {
   EffectComposer,
   N8AO,
@@ -7,10 +7,10 @@ import {
   ToneMapping,
 } from "@react-three/postprocessing";
 import { easing } from "maath";
-import { IHover } from "./interfaces";
+import { IHover } from "../interfaces";
 
 export default function Effects(props: IHover) {
-  const { size } = useThree();
+  // const { size } = useThree();
 
   useFrame((state, delta) => {
     easing.damp3(

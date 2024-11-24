@@ -16,18 +16,13 @@ export interface IGroupProps {
 }
 
 export interface ICanvasProps extends IHover {
-  desciptionProps: {
-    position: number[];
-    rotation: number[];
-  };
+  desciptionProps: JSX.IntrinsicElements["group"];
+  modelingProps: JSX.IntrinsicElements["group"];
 }
 
 export interface IObjectProps extends IHover {
-  group: JSX.IntrinsicElements["group"];
-  desciptionProps: {
-    position: number[];
-    rotation: number[];
-  };
+  modeling: JSX.IntrinsicElements["group"];
+  desciption: JSX.IntrinsicElements["group"];
   height: string;
   width: string;
 }
