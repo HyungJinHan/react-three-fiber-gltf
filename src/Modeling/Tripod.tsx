@@ -1,7 +1,7 @@
 import { Text, useEnvironment, useGLTF } from "@react-three/drei";
 import { Select } from "@react-three/postprocessing";
 import { debounce } from "lodash";
-import { SetStateAction, useCallback } from "react";
+import React, { SetStateAction, useCallback } from "react";
 import { IGroupProps, IModeling, IObjectProps } from "../interfaces";
 import { Description } from "./Description";
 
@@ -39,7 +39,7 @@ export function Tripod(props: IObjectProps) {
     }[props.hovered] ?? "마우스를 올려서 트라이포드 센서의 정보를 확인하세요.";
 
   return (
-    <>
+    <React.Fragment>
       <group {...props.modeling} dispose={null}>
         <Select
           enabled={props.hovered === "트라이포드 콤보"}
@@ -209,7 +209,7 @@ export function Tripod(props: IObjectProps) {
       </Text>
 
       <Description value={descripiton} group={props.desciption} />
-    </>
+    </React.Fragment>
   );
 }
 

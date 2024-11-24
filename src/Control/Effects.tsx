@@ -16,9 +16,9 @@ export default function Effects(props: IHover) {
     easing.damp3(
       state.camera.position,
       [
-        state.pointer.x,
+        state.pointer.x / 1.5,
         1 + state.pointer.y / 2,
-        8 + Math.atan(state.pointer.x * 2),
+        8 + Math.atan(state.pointer.x / 2),
       ],
       0.3,
       delta

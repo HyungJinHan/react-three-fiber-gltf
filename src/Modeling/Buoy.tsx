@@ -1,17 +1,26 @@
-import { Text, useEnvironment, useGLTF } from "@react-three/drei";
+import {
+  Text,
+  useAnimations,
+  useEnvironment,
+  useGLTF,
+} from "@react-three/drei";
 import { Select } from "@react-three/postprocessing";
 import { debounce } from "lodash";
-import { SetStateAction, useCallback } from "react";
+import React, { SetStateAction, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { IModeling, IObjectProps } from "../interfaces";
 import { Description } from "./Description";
 
-const modelingPath = "/modeling/buoy/buoy-draco.glb";
+const modelingPath = "/modeling/buoy/animation/buoy-draco.glb";
 
 export function Buoy(props: IObjectProps) {
   const navigate = useNavigate();
 
-  const { nodes, materials } = useGLTF(modelingPath) as IModeling["buoy"];
+  const { nodes, materials, animations } = useGLTF(
+    modelingPath
+  ) as IModeling["buoy"];
+
+  const { ref, actions } = useAnimations(animations);
 
   const env = useEnvironment({ preset: "city" });
 
@@ -38,7 +47,7 @@ export function Buoy(props: IObjectProps) {
     }[props.hovered] ?? "마우스를 올려서 스마트 부표의 정보를 확인하세요.";
 
   return (
-    <>
+    <React.Fragment>
       <group {...props.modeling} dispose={null}>
         <mesh
           castShadow
@@ -46,6 +55,7 @@ export function Buoy(props: IObjectProps) {
           geometry={nodes.cap.geometry}
           material={materials.aluminium}
           scale={0.001}
+          position={[2.167, 0.206, -0.601]}
         />
 
         <Select
@@ -63,7 +73,7 @@ export function Buoy(props: IObjectProps) {
           />
         </Select>
 
-        <group>
+        <group scale={0.001} position={[2.167, 0.206, -0.601]}>
           <Select
             enabled={props.hovered === "태양광"}
             onPointerOver={over("태양광")}
@@ -73,35 +83,31 @@ export function Buoy(props: IObjectProps) {
               receiveShadow
               geometry={nodes.sun_cell_1.geometry}
               material={materials.sun_cell_1}
-              scale={0.001}
             />
             <mesh
               castShadow
               receiveShadow
               geometry={nodes.sun_cell_2.geometry}
               material={materials.sun_cell_2}
-              scale={0.001}
             />
-            <group scale={0.001}>
-              <mesh
-                castShadow
-                receiveShadow
-                geometry={nodes["5_7002"].geometry}
-                material={materials.sun_plate_1}
-              />
-              <mesh
-                castShadow
-                receiveShadow
-                geometry={nodes["5_7002_1"].geometry}
-                material={materials.sun_plate_2}
-              />
-              <mesh
-                castShadow
-                receiveShadow
-                geometry={nodes["5_7002_2"].geometry}
-                material={materials.sun_plate_3}
-              />
-            </group>
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.sun_plate_1.geometry}
+              material={materials.sun_plate_1}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.sun_plate_2.geometry}
+              material={materials.sun_plate_2}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.sun_plate_3.geometry}
+              material={materials.sun_plate_3}
+            />
           </Select>
         </group>
 
@@ -181,7 +187,7 @@ export function Buoy(props: IObjectProps) {
       </Text>
 
       <Description value={descripiton} group={props.desciption} />
-    </>
+    </React.Fragment>
   );
 }
 

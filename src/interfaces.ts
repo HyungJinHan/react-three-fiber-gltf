@@ -1,6 +1,16 @@
 import * as THREE from "three";
 import { GLTF } from "three-stdlib";
 
+type ActionName =
+  | "sun_cell_1_action"
+  | "sun_cell_2_action"
+  | "sun_plate_action"
+  | "cap_action";
+
+interface GLTFAction extends THREE.AnimationClip {
+  name: ActionName;
+}
+
 export interface IDescriptionProps {
   value: string;
   group: JSX.IntrinsicElements["group"];
@@ -36,9 +46,9 @@ export type IModeling = {
       buoyancy_4: THREE.Mesh;
       sun_cell_1: THREE.Mesh;
       sun_cell_2: THREE.Mesh;
-      ["5_7002"]: THREE.Mesh;
-      ["5_7002_1"]: THREE.Mesh;
-      ["5_7002_2"]: THREE.Mesh;
+      sun_plate_1: THREE.Mesh;
+      sun_plate_2: THREE.Mesh;
+      sun_plate_3: THREE.Mesh;
       rubber: THREE.Mesh;
       cap: THREE.Mesh;
       antenna: THREE.Mesh;
@@ -55,6 +65,7 @@ export type IModeling = {
       rubber: THREE.MeshPhysicalMaterial;
       plastic_black: THREE.MeshStandardMaterial;
     };
+    animations?: GLTFAction[];
   };
 
   tripod: GLTF & {

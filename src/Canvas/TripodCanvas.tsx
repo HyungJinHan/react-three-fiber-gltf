@@ -43,7 +43,7 @@ export const TripodCanvas = (props: ICanvasProps) => {
         position={[0, -0.6, 0]}
         receiveShadow>
         <planeGeometry args={[100, 100]} />
-        <shadowMaterial transparent opacity={0.4} />
+        <shadowMaterial transparent opacity={1} />
       </mesh>
     </Canvas>
   );

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { BuoyCanvas } from "../Canvas/BuoyCanvas";
 import { TripodCanvas } from "../Canvas/TripodCanvas";
@@ -31,8 +31,6 @@ const ChangeCanvas = () => {
     },
   };
 
-  console.log({ ...props.buoy });
-
   switch (location.pathname) {
     case "/buoy":
       return <BuoyCanvas {...(props.buoy as ICanvasProps)} />;
@@ -47,7 +45,7 @@ const ChangeCanvas = () => {
 
 export const Canvas = () => {
   return (
-    <>
+    <React.Fragment>
       <div
         style={{
           backgroundColor: "transparent",
@@ -88,6 +86,6 @@ export const Canvas = () => {
       </div>
 
       <ChangeCanvas />
-    </>
+    </React.Fragment>
   );
 };
