@@ -16,9 +16,9 @@ export default function Effects(props: IHover) {
     easing.damp3(
       state.camera.position,
       [
-        state.pointer.x / 1.5,
-        1 + state.pointer.y / 2,
-        8 + Math.atan(state.pointer.x / 2),
+        state.pointer.x * 1.5,
+        1 + state.pointer.y / 1.5,
+        8 + Math.atan(state.pointer.x * 1.5),
       ],
       0.3,
       delta
@@ -45,7 +45,7 @@ export default function Effects(props: IHover) {
         // hiddenEdgeColor={0x0066a2} // blue
         // visibleEdgeColor={0xffffff} // white
         hiddenEdgeColor={0x0b0b0b} // gray
-        blur
+        blur={true}
         // width={size.width * 5}
         edgeStrength={100}
       />

@@ -5,8 +5,8 @@ import React, { SetStateAction, useCallback } from "react";
 import { IGroupProps, IModeling, IObjectProps } from "../interfaces";
 import { Description } from "./Description";
 
-const modelingPath = "/modeling/tripod/original/tripod-draco.glb";
-// const modelingPath = "/modeling/tripod/fix/tripod-draco.glb";
+// const modelingPath = "/modeling/tripod/original/tripod-draco.glb";
+const modelingPath = "/modeling/tripod/fix/tripod-draco.glb";
 
 const groupProps: IGroupProps["group"] = {
   scale: 0.001,
@@ -32,9 +32,9 @@ export function Tripod(props: IObjectProps) {
     {
       "트라이포드 콤보":
         "이거슨 트라이포드 센서 콤보입니다. 왜 콤보냐구요? 저도 그냥 생각난대로 작성한거라 상관 없어요. 확정 아니거든요.",
-      "용존산소 단일 센서":
+      "용존산소 센서 (단일)":
         "이거슨 용존산소 단일 센서입니다. 용존산소만 단일로 측정하는 센서구요. 수온과 함께 데이터가 들어와요.",
-      "전기전도도 단일 센서":
+      "전기전도도 센서 (단일)":
         "이거슨 전기전도도 단일 센서입니다. 전기전도도 측정에 필요한 수치들을 전부 확인할 수 있어요. 마찬가지로 수온도 있답니다.",
     }[props.hovered] ?? "마우스를 올려서 트라이포드 센서의 정보를 확인하세요.";
 
@@ -116,8 +116,8 @@ export function Tripod(props: IObjectProps) {
         />
 
         <Select
-          enabled={props.hovered === "용존산소 단일 센서"}
-          onPointerOver={over("용존산소 단일 센서")}
+          enabled={props.hovered === "용존산소 센서 (단일)"}
+          onPointerOver={over("용존산소 센서 (단일)")}
           onPointerOut={() => debouncedHover("")}>
           <group {...groupProps}>
             <mesh
@@ -158,8 +158,8 @@ export function Tripod(props: IObjectProps) {
         </Select>
 
         <Select
-          enabled={props.hovered === "전기전도도 단일 센서"}
-          onPointerOver={over("전기전도도 단일 센서")}
+          enabled={props.hovered === "전기전도도 센서 (단일)"}
+          onPointerOver={over("전기전도도 센서 (단일)")}
           onPointerOut={() => debouncedHover("")}>
           <group {...groupProps}>
             <mesh
