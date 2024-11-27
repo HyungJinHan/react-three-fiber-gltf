@@ -30,3 +30,13 @@ body {
   position: fixed;
   overflow: hidden;
 }
+
+@font-face {
+  font-family: "GmarketSansBold";
+  src: url("../public/GmarketSansTTFBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "GmarketSansMedium";
+  src: url("../public/GmarketSansTTFMedium.ttf") format("truetype");
+}

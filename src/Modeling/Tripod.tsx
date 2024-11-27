@@ -2,16 +2,11 @@ import { Text, useEnvironment, useGLTF } from "@react-three/drei";
 import { Select } from "@react-three/postprocessing";
 import { debounce } from "lodash";
 import React, { SetStateAction, useCallback } from "react";
-import { IGroupProps, IModeling, IObjectProps } from "../interfaces";
+import { IModeling, IObjectProps } from "../interfaces";
 import { Description } from "./Description";
 
 // const modelingPath = "/modeling/tripod/original/tripod-draco.glb";
-const modelingPath = "/modeling/tripod/fix/tripod-draco.glb";
-
-const groupProps: IGroupProps["group"] = {
-  scale: 0.001,
-  position: [0, -0.94, 0],
-};
+const modelingPath = "/modeling/tripod/tripod-fix-draco.glb";
 
 export function Tripod(props: IObjectProps) {
   const { nodes, materials } = useGLTF(modelingPath) as IModeling["tripod"];
@@ -45,13 +40,12 @@ export function Tripod(props: IObjectProps) {
           enabled={props.hovered === "트라이포드 콤보"}
           onPointerOver={over("트라이포드 콤보")}
           onPointerOut={() => debouncedHover("")}>
-          <group {...groupProps}>
+          <group>
             <mesh
               castShadow
               receiveShadow
               geometry={nodes.body_ring.geometry}
               material={materials.cable_volt}
-              rotation={[Math.PI, 0, Math.PI]}
               material-envMap={env}
             />
             <mesh
@@ -59,7 +53,6 @@ export function Tripod(props: IObjectProps) {
               receiveShadow
               geometry={nodes.body_cable.geometry}
               material={materials.cable}
-              rotation={[Math.PI, 0, Math.PI]}
               material-envMap={env}
             />
             <mesh
@@ -67,7 +60,6 @@ export function Tripod(props: IObjectProps) {
               receiveShadow
               geometry={nodes.body_cable_connect.geometry}
               material={materials.cable_connect}
-              rotation={[Math.PI, 0, Math.PI]}
               material-envMap={env}
             />
             <mesh
@@ -75,7 +67,6 @@ export function Tripod(props: IObjectProps) {
               receiveShadow
               geometry={nodes.body.geometry}
               material={materials.body}
-              rotation={[Math.PI, 0, Math.PI]}
               // material-envMap={env}
             />
             <mesh
@@ -83,7 +74,6 @@ export function Tripod(props: IObjectProps) {
               receiveShadow
               geometry={nodes.body_rubber.geometry}
               material={materials.rubber}
-              rotation={[Math.PI, 0, Math.PI]}
               material-envMap={env}
             />
             <mesh
@@ -91,7 +81,6 @@ export function Tripod(props: IObjectProps) {
               receiveShadow
               geometry={nodes.body_sensor.geometry}
               material={materials.oxygen_single}
-              rotation={[Math.PI, 0, Math.PI]}
               material-envMap={env}
             />
             <mesh
@@ -99,7 +88,6 @@ export function Tripod(props: IObjectProps) {
               receiveShadow
               geometry={nodes.body_oxygen_sensor.geometry}
               material={materials.oxygen}
-              rotation={[Math.PI, 0, Math.PI]}
               material-envMap={env}
             />
           </group>
@@ -110,22 +98,20 @@ export function Tripod(props: IObjectProps) {
           receiveShadow
           geometry={nodes.cover.geometry}
           material={materials.cover}
-          rotation={[Math.PI, 0.8, Math.PI]}
-          scale={0.001}
-          position={[0, -0.94, 0]}
+          rotation={[0, -0.8, 0]}
+          position={[-30, 0, 100]}
         />
 
         <Select
           enabled={props.hovered === "용존산소 센서 (단일)"}
           onPointerOver={over("용존산소 센서 (단일)")}
           onPointerOut={() => debouncedHover("")}>
-          <group {...groupProps}>
+          <group rotation={[0, 0.1, 0]} position={[0, 0, 50]}>
             <mesh
               castShadow
               receiveShadow
               geometry={nodes.oxygen_cable.geometry}
               material={materials.cable}
-              rotation={[Math.PI, 0, Math.PI]}
               material-envMap={env}
             />
             <mesh
@@ -133,7 +119,6 @@ export function Tripod(props: IObjectProps) {
               receiveShadow
               geometry={nodes.oxygen_cable_connect.geometry}
               material={materials.cable_connect}
-              rotation={[Math.PI, 0, Math.PI]}
               material-envMap={env}
             />
 
@@ -142,7 +127,6 @@ export function Tripod(props: IObjectProps) {
               receiveShadow
               geometry={nodes.oxygen_cable_volt.geometry}
               material={materials.cable_volt}
-              rotation={[Math.PI, 0, Math.PI]}
               material-envMap={env}
             />
 
@@ -151,7 +135,6 @@ export function Tripod(props: IObjectProps) {
               receiveShadow
               geometry={nodes.oxygen_sensor.geometry}
               material={materials.oxygen_single}
-              rotation={[Math.PI, 0, Math.PI]}
               material-envMap={env}
             />
           </group>
@@ -161,13 +144,12 @@ export function Tripod(props: IObjectProps) {
           enabled={props.hovered === "전기전도도 센서 (단일)"}
           onPointerOver={over("전기전도도 센서 (단일)")}
           onPointerOut={() => debouncedHover("")}>
-          <group {...groupProps}>
+          <group>
             <mesh
               castShadow
               receiveShadow
               geometry={nodes.conductivity_cable.geometry}
               material={materials.cable}
-              rotation={[Math.PI, 0, Math.PI]}
               material-envMap={env}
             />
             <mesh
@@ -175,7 +157,6 @@ export function Tripod(props: IObjectProps) {
               receiveShadow
               geometry={nodes.conductivity_cable_connect.geometry}
               material={materials.cable_connect}
-              rotation={[Math.PI, 0, Math.PI]}
               material-envMap={env}
             />
             <mesh
@@ -183,7 +164,6 @@ export function Tripod(props: IObjectProps) {
               receiveShadow
               geometry={nodes.conductivity_cable_volt.geometry}
               material={materials.cable_volt}
-              rotation={[Math.PI, 0, Math.PI]}
               material-envMap={env}
             />
 
@@ -192,19 +172,13 @@ export function Tripod(props: IObjectProps) {
               receiveShadow
               geometry={nodes.conductivity_sensor.geometry}
               material={materials.oxygen_single}
-              rotation={[Math.PI, 0, Math.PI]}
               material-envMap={env}
             />
           </group>
         </Select>
       </group>
 
-      <Text
-        position={[1.2, 1.0, -0.5]}
-        color="black"
-        fontSize={0.15}
-        font="GmarketSansTTFBold.ttf"
-        letterSpacing={-0.05}>
+      <Text {...props.text}>
         {props.hovered ? props.hovered : "트라이포드 센서"}
       </Text>
 

@@ -1,91 +1,120 @@
-import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { BuoyCanvas } from "../Canvas/BuoyCanvas";
-import { TripodCanvas } from "../Canvas/TripodCanvas";
-import { ICanvasProps } from "../interfaces";
+import { Bvh, Sky, useCursor } from "@react-three/drei";
+import { Canvas as FiberCanvas } from "@react-three/fiber";
+import { Selection } from "@react-three/postprocessing";
+import React, { Suspense, useState } from "react";
+import { Location, useLocation } from "react-router-dom";
+import Effects from "../Effects/Effects";
+import Light from "../Effects/Light";
+import Loading from "../Effects/Loading";
+import { IObjectProps } from "../interfaces";
+import { Buoy } from "../Modeling/Buoy";
+import { Tripod } from "../Modeling/Tripod";
+import Nav from "./Nav";
 
-const ChangeCanvas = () => {
-  const location = useLocation();
-  const [hovered, hover] = useState("");
+interface IProps {
+  hovered: string;
+  hover: React.Dispatch<React.SetStateAction<string>>;
+  location: Location<any>;
+}
 
-  const props = {
+const ChangeModeling = (props: IProps) => {
+  useCursor(props.hovered === "본체" ? true : false);
+
+  const textProps = {
+    position: [1.2, 0.8, -0.5],
+    color: "black",
+    fontSize: 0.15,
+    font: "GmarketSansTTFBold.ttf",
+    letterSpacing: -0.05,
+  };
+
+  const modelingProps = {
     buoy: {
-      desciptionProps: { position: [-1.8, 0.1, -1], rotation: [0, 0.3, 0] },
-      modelingProps: {
-        scale: 1.8,
-        position: [-1.8, -0.2, 2],
+      desciption: { position: [-1.8, 0.1, -1], rotation: [0, 0.3, 0] },
+      modeling: {
+        scale: 0.0017,
+        position: [1, -0.5, -0.5],
         rotation: [0.1, Math.PI / 5, 0],
       },
-      hovered: hovered,
-      hover: hover,
+      height: "100vh",
+      width: "100%",
+      hovered: props.hovered,
+      hover: props.hover,
+      text: { ...textProps },
     },
     tripod: {
-      desciptionProps: { position: [-1.8, 0.1, -1], rotation: [0, 0.3, 0] },
-      modelingProps: {
-        scale: 4.5,
+      desciption: { position: [-1.8, 0.1, -1], rotation: [0, 0.3, 0] },
+      modeling: {
+        scale: 0.004,
         position: [0.9, -0.75, 0.2],
-        rotation: [0, 0.1, 0],
+        rotation: [Math.PI, 0, Math.PI],
       },
-      hovered: hovered,
-      hover: hover,
+      height: "100vh",
+      width: "100%",
+      hovered: props.hovered,
+      hover: props.hover,
+      text: { ...textProps },
     },
   };
 
-  switch (location.pathname) {
+  switch (props.location.pathname) {
     case "/buoy":
-      return <BuoyCanvas {...(props.buoy as ICanvasProps)} />;
+      return (
+        <Suspense fallback={<Loading />}>
+          <Buoy {...(modelingProps.buoy as IObjectProps)} />
+        </Suspense>
+      );
 
     case "/tripod":
-      return <TripodCanvas {...(props.tripod as ICanvasProps)} />;
+      return (
+        <Suspense fallback={<Loading />}>
+          <Tripod {...(modelingProps.tripod as IObjectProps)} />
+        </Suspense>
+      );
 
     default:
-      return <BuoyCanvas {...(props.buoy as ICanvasProps)} />;
+      return (
+        <Suspense fallback={<Loading />}>
+          <Buoy {...(modelingProps.buoy as IObjectProps)} />
+        </Suspense>
+      );
   }
 };
 
 export const Canvas = () => {
+  const [hovered, hover] = useState("");
+  const location = useLocation();
+
   return (
     <React.Fragment>
-      <div
-        style={{
-          backgroundColor: "transparent",
-          position: "absolute",
-          top: 30,
-          zIndex: 100,
-          width: "100%",
-        }}>
-        <div
-          style={{
-            backgroundColor: "transparent",
-            display: "flex",
-            justifyContent: "space-around",
-            width: "50%",
-            margin: "0 auto",
-          }}>
-          <Link
-            style={{
-              fontSize: 20,
-              fontWeight: "bolder",
-              textDecoration: "none",
-              color: "black",
-            }}
-            to={"/"}>
-            스마트 부표
-          </Link>
-          <Link
-            style={{
-              fontSize: 20,
-              fontWeight: "bolder",
-              textDecoration: "none",
-              color: "black",
-            }}
-            to={"/tripod"}>
-            트라이포드 센서
-          </Link>
-        </div>
-      </div>
+      <Nav />
 
-      <ChangeCanvas />
+      <FiberCanvas
+        flat
+        dpr={[1, 1.5]}
+        gl={{ antialias: false }}
+        camera={{ position: [0, 1, 6], fov: 25, near: 1, far: 20 }}>
+        <Light />
+        <Sky />
+
+        <Bvh firstHitOnly>
+          <Selection>
+            <Effects hovered={hovered} hover={hover} />
+            <ChangeModeling
+              hovered={hovered}
+              hover={hover}
+              location={location}
+            />
+          </Selection>
+        </Bvh>
+        <mesh
+          rotation={[-Math.PI / 2, 0, 0]}
+          position={[0, -0.6, 0]}
+          receiveShadow>
+          <planeGeometry args={[100, 100]} />
+          <shadowMaterial transparent opacity={1} />
+        </mesh>
+      </FiberCanvas>
     </React.Fragment>
   );
 };
