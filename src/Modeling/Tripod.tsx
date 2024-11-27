@@ -5,8 +5,10 @@ import React, { SetStateAction, useCallback } from "react";
 import { IModeling, IObjectProps } from "../interfaces";
 import { Description } from "./Description";
 
-// const modelingPath = "/modeling/tripod/original/tripod-draco.glb";
-const modelingPath = "/modeling/tripod/tripod-fix-draco.glb";
+// const modelingPath = "/modeling/tripod/tripod-test.glb";
+const modelingPath = "/modeling/tripod/tripod-cable-draco.glb";
+// const modelingPath = "/modeling/tripod/tripod-fix-draco.glb";
+// const modelingPath = "/modeling/tripod/tripod-draco.glb";
 
 export function Tripod(props: IObjectProps) {
   const { nodes, materials } = useGLTF(modelingPath) as IModeling["tripod"];
@@ -106,35 +108,20 @@ export function Tripod(props: IObjectProps) {
           enabled={props.hovered === "용존산소 센서 (단일)"}
           onPointerOver={over("용존산소 센서 (단일)")}
           onPointerOut={() => debouncedHover("")}>
-          <group rotation={[0, 0.1, 0]} position={[0, 0, 50]}>
+          <group rotation={[0, 0.1, 0]} position={[10, -20, 40]}>
             <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.oxygen_cable.geometry}
+              geometry={nodes.oxygen_sensor_1.geometry}
               material={materials.cable}
               material-envMap={env}
             />
             <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.oxygen_cable_connect.geometry}
-              material={materials.cable_connect}
-              material-envMap={env}
-            />
-
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.oxygen_cable_volt.geometry}
-              material={materials.cable_volt}
-              material-envMap={env}
-            />
-
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.oxygen_sensor.geometry}
+              geometry={nodes.oxygen_sensor_2.geometry}
               material={materials.oxygen_single}
+              material-envMap={env}
+            />
+            <mesh
+              geometry={nodes.oxygen_sensor_3.geometry}
+              material={materials.cable_connect}
               material-envMap={env}
             />
           </group>
@@ -144,34 +131,20 @@ export function Tripod(props: IObjectProps) {
           enabled={props.hovered === "전기전도도 센서 (단일)"}
           onPointerOver={over("전기전도도 센서 (단일)")}
           onPointerOut={() => debouncedHover("")}>
-          <group>
+          <group position={[10, 0, -40]}>
             <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.conductivity_cable.geometry}
+              geometry={nodes.conductivity_sensor_1.geometry}
+              material={materials.oxygen_single}
+              material-envMap={env}
+            />
+            <mesh
+              geometry={nodes.conductivity_sensor_2.geometry}
               material={materials.cable}
               material-envMap={env}
             />
             <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.conductivity_cable_connect.geometry}
+              geometry={nodes.conductivity_sensor_3.geometry}
               material={materials.cable_connect}
-              material-envMap={env}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.conductivity_cable_volt.geometry}
-              material={materials.cable_volt}
-              material-envMap={env}
-            />
-
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.conductivity_sensor.geometry}
-              material={materials.oxygen_single}
               material-envMap={env}
             />
           </group>

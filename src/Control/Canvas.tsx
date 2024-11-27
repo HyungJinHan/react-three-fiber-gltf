@@ -32,7 +32,7 @@ const ChangeModeling = (props: IProps) => {
     buoy: {
       desciption: { position: [-1.8, 0.1, -1], rotation: [0, 0.3, 0] },
       modeling: {
-        scale: 0.0017,
+        scale: 0.0016,
         position: [1, -0.5, -0.5],
         rotation: [0.1, Math.PI / 5, 0],
       },
@@ -46,7 +46,7 @@ const ChangeModeling = (props: IProps) => {
       desciption: { position: [-1.8, 0.1, -1], rotation: [0, 0.3, 0] },
       modeling: {
         scale: 0.004,
-        position: [0.9, -0.75, 0.2],
+        position: [1, -0.75, -0.1],
         rotation: [Math.PI, 0, Math.PI],
       },
       height: "100vh",

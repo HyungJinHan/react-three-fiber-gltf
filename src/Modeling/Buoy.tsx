@@ -12,9 +12,9 @@ import { useNavigate } from "react-router-dom";
 import { IModeling, IObjectProps } from "../interfaces";
 import { Description } from "./Description";
 
-const partRotate = {
+const partMoveProps = {
   rotation: [0, 0.5, 0],
-  position: [-200, 20, 200],
+  position: [-200, 18, 200],
 };
 
 // const modelingPath = "/modeling/buoy/animation/buoy-draco.glb";
@@ -136,7 +136,7 @@ export function Buoy(props: IObjectProps) {
             material={materials.rubber}
           />
           <mesh
-            {...(partRotate as MeshProps)}
+            {...(partMoveProps as MeshProps)}
             geometry={nodes.buoyancy_2_1.geometry}
             material={materials.rubber}
           />
@@ -155,7 +155,7 @@ export function Buoy(props: IObjectProps) {
               material={materials.plastic_black}
             />
           </group>
-          <group {...(partRotate as GroupProps)}>
+          <group {...(partMoveProps as GroupProps)}>
             <mesh
               geometry={nodes.buoyancy_2_2.geometry}
               material={materials.aluminium}

@@ -64,12 +64,18 @@ type TripodProps = {
     body: THREE.Mesh;
     body_oxygen_sensor: THREE.Mesh;
     body_sensor: THREE.Mesh;
-    oxygen_sensor: THREE.Mesh;
-    oxygen_cable_volt: THREE.Mesh;
-    oxygen_cable: THREE.Mesh;
-    conductivity_sensor: THREE.Mesh;
-    conductivity_cable_volt: THREE.Mesh;
-    conductivity_cable: THREE.Mesh;
+    oxygen_sensor_1: THREE.Mesh;
+    oxygen_sensor_2: THREE.Mesh;
+    oxygen_sensor_3: THREE.Mesh;
+    conductivity_sensor_1: THREE.Mesh;
+    conductivity_sensor_2: THREE.Mesh;
+    conductivity_sensor_3: THREE.Mesh;
+    conductivity_sensor?: THREE.Mesh;
+    conductivity_cable?: THREE.Mesh;
+    conductivity_cable_volt?: THREE.Mesh;
+    oxygen_sensor?: THREE.Mesh;
+    oxygen_cable?: THREE.Mesh;
+    oxygen_cable_volt?: THREE.Mesh;
   };
   Materials: {
     cable_connect: THREE.MeshStandardMaterial;
