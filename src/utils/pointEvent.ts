@@ -1,5 +1,6 @@
 import { debounce } from "lodash";
 import { SetStateAction, useCallback } from "react";
+import { isMobile } from "./isMobile";
 
 export const usePointEvent = (
   hovered: string,
@@ -14,14 +15,23 @@ export const usePointEvent = (
       // eslint-disable-next-line no-sequences
       e.stopPropagation(), debouncedHover(name)
     );
-  return {
-    enabled: hovered === name,
-    onPointerOver: over(name),
-    onPointerUp: over(name),
-    onPointerDown: over(name),
-    onPointerEnter: over(name),
-    onPointerLeave: over(name),
-    // onPointerMissed: () => debouncedHover(""),
-    onPointerOut: () => debouncedHover(""),
-  };
+
+  if (isMobile) {
+    return {
+      enabled: hovered === name,
+      onPointerOver: over(name),
+      onPointerUp: over(name),
+      onPointerDown: over(name),
+      onPointerEnter: over(name),
+      onPointerLeave: over(name),
+      // onPointerMissed: () => debouncedHover(""),
+      onPointerOut: () => debouncedHover(""),
+    };
+  } else {
+    return {
+      enabled: hovered === name,
+      onPointerOver: over(name),
+      onPointerOut: () => debouncedHover(""),
+    };
+  }
 };

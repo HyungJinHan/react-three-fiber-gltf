@@ -2,6 +2,7 @@ import { Text, useEnvironment, useGLTF } from "@react-three/drei";
 import { Select } from "@react-three/postprocessing";
 import React from "react";
 import { IModeling, IObjectProps } from "../interfaces";
+import { isMobile } from "../utils/isMobile";
 import { usePointEvent } from "../utils/pointEvent";
 import { Description } from "./Description";
 
@@ -11,7 +12,7 @@ const modelingPath = "/modeling/tripod/tripod-cable-draco.glb";
 export function Tripod(props: IObjectProps) {
   const { nodes, materials } = useGLTF(modelingPath) as IModeling["tripod"];
 
-  const env = useEnvironment({ preset: "city" });
+  const env = useEnvironment({ ...props.env });
 
   const descripiton =
     {
@@ -21,7 +22,12 @@ export function Tripod(props: IObjectProps) {
         "이거슨 용존산소 단일 센서입니다. 용존산소만 단일로 측정하는 센서구요. 수온과 함께 데이터가 들어와요.",
       "전기전도도 센서 (단일)":
         "이거슨 전기전도도 단일 센서입니다. 전기전도도 측정에 필요한 수치들을 전부 확인할 수 있어요. 마찬가지로 수온도 있답니다.",
-    }[props.hovered] ?? "마우스를 올려서 트라이포드 센서의 정보를 확인하세요.";
+    }[props.hovered] ??
+    `${
+      isMobile ? "터치를 통해" : "마우스를 올려서"
+    } 트라이포드 센서의 정보를 확인하세요.`;
+
+  useEnvironment.preload({ ...props.env });
 
   return (
     <React.Fragment>

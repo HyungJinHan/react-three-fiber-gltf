@@ -9,6 +9,7 @@ import { Select } from "@react-three/postprocessing";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { IModeling, IObjectProps } from "../interfaces";
+import { isMobile } from "../utils/isMobile";
 import { usePointEvent } from "../utils/pointEvent";
 import { Description } from "./Description";
 
@@ -29,7 +30,8 @@ export function Buoy(props: IObjectProps) {
 
   const { ref, actions } = useAnimations(animations);
 
-  const env = useEnvironment({ preset: "city" });
+  // const env = useEnvironment({ preset: "city" });
+  const env = useEnvironment({ ...props.env });
 
   const descripiton =
     {
@@ -42,7 +44,12 @@ export function Buoy(props: IObjectProps) {
       본체: "이거슨 본체입니다. 멋지죠? 저도 멋지다고 생각합니다. 알루미늄으로 만들어졌어요. 내부에 배터리하고 센서가 들어가 있어서 소듕하게 다뤄야해요. 아시겠죠? 그렇다면 내부에 들어간 센서를 확인해보고 싶죠? 클릭해주세요.",
       안테나:
         "이거슨 안테나입니다. 멋지죠? 저도 멋지다고 생각합니다. 그렇게 보이지는 않지만 안테나 맞아요.",
-    }[props.hovered] ?? "마우스를 올려서 스마트 부표의 정보를 확인하세요.";
+    }[props.hovered] ??
+    `${
+      isMobile ? "터치를 통해" : "마우스를 올려서"
+    } 스마트 부표의 정보를 확인하세요.`;
+
+  useEnvironment.preload({ ...props.env });
 
   return (
     <React.Fragment>

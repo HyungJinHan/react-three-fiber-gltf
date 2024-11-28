@@ -5,7 +5,7 @@ const Light = () => {
 
       {/* <ambientLight intensity={1.5 * Math.PI} /> */}
 
-      <directionalLight intensity={1.2} position={[0, 0, 10]} castShadow />
+      <directionalLight intensity={1.2} position={[10, 0, 10]} castShadow />
       <directionalLight intensity={1.2} position={[0, -5, 30]} castShadow />
 
       {/* <directionalLight intensity={1.2} position={[10, 5, 5]} castShadow /> */}

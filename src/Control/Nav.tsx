@@ -19,7 +19,7 @@ const Nav = (props: IProps) => {
           backgroundColor: "transparent",
           display: "flex",
           justifyContent: "space-around",
-          width: "50%",
+          width: "80%",
           margin: "0 auto",
         }}>
         <Link

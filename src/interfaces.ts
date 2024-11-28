@@ -1,3 +1,4 @@
+import { EnvironmentLoaderProps } from "@react-three/drei";
 import { ReactThreeFiber } from "@react-three/fiber";
 import * as THREE from "three";
 import { GLTF } from "three-stdlib";
@@ -118,6 +119,7 @@ export interface IObjectProps extends IHover {
   height: string;
   width: string;
   text: FiberText;
+  env: Partial<EnvironmentLoaderProps>;
 }
 
 export type IModeling = {

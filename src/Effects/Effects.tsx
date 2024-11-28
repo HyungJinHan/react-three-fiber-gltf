@@ -8,6 +8,7 @@ import {
 } from "@react-three/postprocessing";
 import { easing } from "maath";
 import { IHover } from "../interfaces";
+import { isMobile } from "../utils/isMobile";
 
 export default function Effects(props: IHover) {
   // const { size } = useThree();
@@ -15,11 +16,17 @@ export default function Effects(props: IHover) {
   useFrame((state, delta) => {
     easing.damp3(
       state.camera.position,
-      [
-        state.pointer.x * 1.5,
-        1 + state.pointer.y / 1.5,
-        8 + Math.atan(state.pointer.x * 1.5),
-      ],
+      isMobile
+        ? [
+            state.pointer.x / 5,
+            1 + state.pointer.y / 1.5,
+            8 + Math.atan(state.pointer.x / 5),
+          ]
+        : [
+            state.pointer.x * 1.5,
+            1 + state.pointer.y / 1.5,
+            8 + Math.atan(state.pointer.x * 1.5),
+          ],
       0.3,
       delta
     );
