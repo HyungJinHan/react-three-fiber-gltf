@@ -1,4 +1,4 @@
-import { Bvh, Sky, useCursor } from "@react-three/drei";
+import { Bvh, Sky } from "@react-three/drei";
 import { Canvas as FiberCanvas } from "@react-three/fiber";
 import { Selection } from "@react-three/postprocessing";
 import React, { Suspense, useState } from "react";
@@ -18,7 +18,7 @@ interface IProps {
 }
 
 const ChangeModeling = (props: IProps) => {
-  useCursor(props.hovered === "본체" ? true : false);
+  // useCursor(props.hovered === "본체" ? true : false);
 
   const textProps = {
     position: [1.2, 0.8, -0.5],
@@ -87,7 +87,7 @@ export const Canvas = () => {
 
   return (
     <React.Fragment>
-      <Nav />
+      <Nav hover={hover} />
 
       <FiberCanvas
         flat
@@ -109,9 +109,9 @@ export const Canvas = () => {
         </Bvh>
         <mesh
           rotation={[-Math.PI / 2, 0, 0]}
-          position={[0, -0.6, 0]}
+          position={[0, -0.6, -0.5]}
           receiveShadow>
-          <planeGeometry args={[100, 100]} />
+          <circleGeometry args={[3.5, 100]} />
           <shadowMaterial transparent opacity={1} />
         </mesh>
       </FiberCanvas>

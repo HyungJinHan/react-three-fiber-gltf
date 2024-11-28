@@ -1,29 +1,17 @@
 import { Text, useEnvironment, useGLTF } from "@react-three/drei";
 import { Select } from "@react-three/postprocessing";
-import { debounce } from "lodash";
-import React, { SetStateAction, useCallback } from "react";
+import React from "react";
 import { IModeling, IObjectProps } from "../interfaces";
+import { usePointEvent } from "../utils/pointEvent";
 import { Description } from "./Description";
 
-// const modelingPath = "/modeling/tripod/tripod-test.glb";
 const modelingPath = "/modeling/tripod/tripod-cable-draco.glb";
-// const modelingPath = "/modeling/tripod/tripod-fix-draco.glb";
-// const modelingPath = "/modeling/tripod/tripod-draco.glb";
+// tripod-fix-draco.glb, tripod-draco.glb, tripod-cable-draco.glb
 
 export function Tripod(props: IObjectProps) {
   const { nodes, materials } = useGLTF(modelingPath) as IModeling["tripod"];
 
   const env = useEnvironment({ preset: "city" });
-
-  // Debounce hover a bit to stop the ticker from being erratic
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debouncedHover = useCallback(debounce(props.hover, 30), []);
-
-  const over =
-    (name: SetStateAction<string>) => (e: { stopPropagation: () => any }) => (
-      // eslint-disable-next-line no-sequences
-      e.stopPropagation(), debouncedHover(name)
-    );
 
   const descripiton =
     {
@@ -39,9 +27,7 @@ export function Tripod(props: IObjectProps) {
     <React.Fragment>
       <group {...props.modeling} dispose={null}>
         <Select
-          enabled={props.hovered === "트라이포드 콤보"}
-          onPointerOver={over("트라이포드 콤보")}
-          onPointerOut={() => debouncedHover("")}>
+          {...usePointEvent(props.hovered, props.hover, "트라이포드 콤보")}>
           <group>
             <mesh
               castShadow
@@ -69,7 +55,6 @@ export function Tripod(props: IObjectProps) {
               receiveShadow
               geometry={nodes.body.geometry}
               material={materials.body}
-              // material-envMap={env}
             />
             <mesh
               castShadow
@@ -101,13 +86,15 @@ export function Tripod(props: IObjectProps) {
           geometry={nodes.cover.geometry}
           material={materials.cover}
           rotation={[0, -0.8, 0]}
-          position={[-30, 0, 100]}
+          position={[-15, 0, 70]}
         />
 
         <Select
-          enabled={props.hovered === "용존산소 센서 (단일)"}
-          onPointerOver={over("용존산소 센서 (단일)")}
-          onPointerOut={() => debouncedHover("")}>
+          {...usePointEvent(
+            props.hovered,
+            props.hover,
+            "용존산소 센서 (단일)"
+          )}>
           <group rotation={[0, 0.1, 0]} position={[10, -20, 40]}>
             <mesh
               geometry={nodes.oxygen_sensor_1.geometry}
@@ -128,9 +115,11 @@ export function Tripod(props: IObjectProps) {
         </Select>
 
         <Select
-          enabled={props.hovered === "전기전도도 센서 (단일)"}
-          onPointerOver={over("전기전도도 센서 (단일)")}
-          onPointerOut={() => debouncedHover("")}>
+          {...usePointEvent(
+            props.hovered,
+            props.hover,
+            "전기전도도 센서 (단일)"
+          )}>
           <group position={[10, 0, -40]}>
             <mesh
               geometry={nodes.conductivity_sensor_1.geometry}

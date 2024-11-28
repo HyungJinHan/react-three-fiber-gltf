@@ -6,10 +6,10 @@ import {
 } from "@react-three/drei";
 import { GroupProps, MeshProps } from "@react-three/fiber";
 import { Select } from "@react-three/postprocessing";
-import { debounce } from "lodash";
-import React, { SetStateAction, useCallback } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { IModeling, IObjectProps } from "../interfaces";
+import { usePointEvent } from "../utils/pointEvent";
 import { Description } from "./Description";
 
 const partMoveProps = {
@@ -31,16 +31,6 @@ export function Buoy(props: IObjectProps) {
 
   const env = useEnvironment({ preset: "city" });
 
-  // Debounce hover a bit to stop the ticker from being erratic
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debouncedHover = useCallback(debounce(props.hover, 30), []);
-
-  const over =
-    (name: SetStateAction<string>) => (e: { stopPropagation: () => any }) => (
-      // eslint-disable-next-line no-sequences
-      e.stopPropagation(), debouncedHover(name)
-    );
-
   const descripiton =
     {
       "태양광 패널":
@@ -58,10 +48,7 @@ export function Buoy(props: IObjectProps) {
     <React.Fragment>
       <group {...props.modeling} dispose={null}>
         <group>
-          <Select
-            enabled={props.hovered === "태양광 패널"}
-            onPointerOver={over("태양광 패널")}
-            onPointerOut={() => debouncedHover("")}>
+          <Select {...usePointEvent(props.hovered, props.hover, "태양광 패널")}>
             <group>
               <mesh
                 castShadow
@@ -113,11 +100,7 @@ export function Buoy(props: IObjectProps) {
           material={materials.rubber}
         />
 
-        <Select
-          enabled={props.hovered === "본체"}
-          onPointerOver={over("본체")}
-          onPointerOut={() => debouncedHover("")}
-          onClick={() => navigate("/tripod")}>
+        <Select {...usePointEvent(props.hovered, props.hover, "본체")}>
           <mesh
             castShadow
             receiveShadow
@@ -128,9 +111,7 @@ export function Buoy(props: IObjectProps) {
         </Select>
 
         <Select
-          enabled={props.hovered === "미끄럼 방지 패드"}
-          onPointerOver={over("미끄럼 방지 패드")}
-          onPointerOut={() => debouncedHover("")}>
+          {...usePointEvent(props.hovered, props.hover, "미끄럼 방지 패드")}>
           <mesh
             geometry={nodes.buoyancy_1_2.geometry}
             material={materials.rubber}
@@ -141,10 +122,7 @@ export function Buoy(props: IObjectProps) {
             material={materials.rubber}
           />
         </Select>
-        <Select
-          enabled={props.hovered === "부력제"}
-          onPointerOver={over("부력제")}
-          onPointerOut={() => debouncedHover("")}>
+        <Select {...usePointEvent(props.hovered, props.hover, "부력제")}>
           <group>
             <mesh
               geometry={nodes.buoyancy_1_1.geometry}
@@ -196,10 +174,7 @@ export function Buoy(props: IObjectProps) {
           />
         </group>
 
-        <Select
-          enabled={props.hovered === "안테나"}
-          onPointerOver={over("안테나")}
-          onPointerOut={() => debouncedHover("")}>
+        <Select {...usePointEvent(props.hovered, props.hover, "안테나")}>
           <mesh
             castShadow
             receiveShadow

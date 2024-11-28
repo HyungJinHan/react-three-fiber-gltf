@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 
-const Nav = () => {
+interface IProps {
+  hover: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Nav = (props: IProps) => {
   return (
     <div
       style={{
@@ -19,6 +23,7 @@ const Nav = () => {
           margin: "0 auto",
         }}>
         <Link
+          onClick={() => props.hover("")}
           style={{
             fontSize: 20,
             fontWeight: "bolder",
@@ -29,6 +34,7 @@ const Nav = () => {
           스마트 부표
         </Link>
         <Link
+          onClick={() => props.hover("")}
           style={{
             fontSize: 20,
             fontWeight: "bolder",
