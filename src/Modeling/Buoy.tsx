@@ -1,13 +1,7 @@
-import {
-  Text,
-  useAnimations,
-  useEnvironment,
-  useGLTF,
-} from "@react-three/drei";
+import { Text, useEnvironment, useGLTF } from "@react-three/drei";
 import { GroupProps, MeshProps } from "@react-three/fiber";
 import { Select } from "@react-three/postprocessing";
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { IModeling, IObjectProps } from "../interfaces";
 import { isMobile } from "../utils/isMobile";
 import { usePointEvent } from "../utils/pointEvent";
@@ -22,13 +16,13 @@ const partMoveProps = {
 const modelingPath = "/modeling/buoy/buoy-draco.glb";
 
 export function Buoy(props: IObjectProps) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const { nodes, materials, animations } = useGLTF(
+  const { nodes, materials /** animations */ } = useGLTF(
     modelingPath
   ) as IModeling["buoy"];
 
-  const { ref, actions } = useAnimations(animations);
+  // const { ref, actions } = useAnimations(animations);
 
   // const env = useEnvironment({ preset: "city" });
   const env = useEnvironment({ ...props.env });
