@@ -32,14 +32,15 @@ const ChangeModeling = (props: IProps) => {
         // files: "/environment/venice_sunset_1k.hdr", // sunset
       },
       text: {
-        position: [1.2, 0.8, -0.5],
+        position: [-1, 0.8, -0.25],
+        rotation: [0, 0.3, 0],
         color: "black",
         fontSize: 0.15,
         font: "GmarketSansTTFBold.ttf",
         letterSpacing: -0.05,
       },
       desciption: {
-        position: [-1.8, 0.1, -1],
+        position: [-1.2, 0.1, -0.97],
         rotation: [0, 0.3, 0],
       },
     },
@@ -53,7 +54,7 @@ const ChangeModeling = (props: IProps) => {
         // files: "/environment/venice_sunset_1k.hdr", // sunset
       },
       text: {
-        position: [0.05, 1.23, -0.5],
+        position: [0, 1.23, -0.5],
         color: "black",
         fontSize: 0.15,
         font: "GmarketSansTTFBold.ttf",
@@ -61,7 +62,7 @@ const ChangeModeling = (props: IProps) => {
       },
       desciption: {
         scale: 1,
-        position: [-0.5, 0.5, -1.2],
+        position: [0, 0.57, -1.2],
         rotation: [0, 0, 0],
       },
     },
@@ -97,7 +98,7 @@ const ChangeModeling = (props: IProps) => {
   const mobileModelingProps = {
     buoy: {
       modeling: {
-        scale: 0.00125,
+        scale: 0.0012,
         position: [0, -0.7, -0.5],
         rotation: [0.1, Math.PI / 5, 0],
       },

@@ -1,21 +1,20 @@
-import { Mask, Text, useMask } from "@react-three/drei";
+import { Mask, Text } from "@react-three/drei";
 import { IDescriptionProps } from "../interfaces";
+import { isMobile } from "../utils/isMobile";
 
 export const Description = (props: IDescriptionProps) => {
-  const stencil = useMask(1);
-
   return (
     <group {...props.group}>
       <Text
         maxWidth={1.5}
-        lineHeight={1.5}
+        lineHeight={1.7}
         anchorY="top"
-        position={[0.5 * 1.1, 0.5, 1]}
+        textAlign={isMobile ? "center" : "left"}
+        position={[0, 0.5, 0.8]}
         color={"black"}
         fontSize={0.08}
         font="GmarketSansTTFMedium.ttf">
         {props.value}
-        <meshBasicMaterial {...stencil} />
       </Text>
 
       <Mask id={1}>

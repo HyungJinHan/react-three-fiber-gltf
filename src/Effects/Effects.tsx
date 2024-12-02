@@ -18,9 +18,9 @@ export default function Effects(props: IHover) {
       state.camera.position,
       isMobile
         ? [
-            state.pointer.x / 5,
+            state.pointer.x / 3.5,
             1 + state.pointer.y / 1.5,
-            8 + Math.atan(state.pointer.x / 5),
+            8 + Math.atan(state.pointer.x / 3.5),
           ]
         : [
             state.pointer.x * 1.5,

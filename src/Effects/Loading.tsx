@@ -3,7 +3,8 @@ import styled from "styled-components";
 
 const LoadingText = styled.p`
   font-family: "GmarketSansBold";
-  font-size: 1.5rem;
+  /* font-size: 1.5rem; */
+  font-size: calc(10px + 2vmin);
   text-align: center;
 `;
 

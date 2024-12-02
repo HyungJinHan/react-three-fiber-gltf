@@ -10,10 +10,11 @@ type ActionName =
   | "cap_action";
 
 type FiberText = JSX.IntrinsicElements["mesh"] & {
-  color: ReactThreeFiber.Color;
-  fontSize: number;
-  font: string;
-  letterSpacing: number;
+  color?: ReactThreeFiber.Color;
+  fontSize?: number;
+  font?: string;
+  letterSpacing?: number;
+  textAlign?: "left" | "right" | "center" | "justify";
 };
 
 type BuoyProps = {
