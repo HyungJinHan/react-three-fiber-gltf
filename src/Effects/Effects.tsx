@@ -24,7 +24,7 @@ export default function Effects(props: IHover) {
           ]
         : [
             state.pointer.x * 1.5,
-            1 + state.pointer.y / 1.5,
+            1 + state.pointer.y * 1.1,
             8 + Math.atan(state.pointer.x * 1.5),
           ],
       0.3,
