@@ -1,3 +1,9 @@
+<div align='center'>
+
+<img src="./public/readme/main.png" width="70%"/>
+
+</div>
+
 - [r3f GLTF Web Study](#r3f-gltf-web-study)
   - [1. 모델링 최적화 관련](#1-모델링-최적화-관련)
     - [1-1. gltf-pipeline](#1-1-gltf-pipeline)
@@ -54,7 +60,7 @@ npx gltfjsx tripod-draco.glb --tranform --types
 
 > [!NOTE]
 >
-> 해당 기능 구현을 위한 필수 사항이 아닌 라이브러리는 `+` 표 시
+> 해당 기능 구현을 위한 필수 사항이 아닌 라이브러리는 `+` 표시
 
 ```diff
 "@react-three/drei": "^9.117.3",
