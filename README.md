@@ -8,6 +8,7 @@
   - [1. 모델링 최적화 관련](#1-모델링-최적화-관련)
     - [1-1. gltf-pipeline](#1-1-gltf-pipeline)
     - [1-2. gltfjsx](#1-2-gltfjsx)
+      - [1-2-1. gltfjsx Option](#1-2-1-gltfjsx-option)
     - [1-3. 모델링 수정 프로세스](#1-3-모델링-수정-프로세스)
   - [2. Dependencies](#2-dependencies)
     - [2-1. 사용한 라이브러리](#2-1-사용한-라이브러리)
@@ -42,6 +43,39 @@ npm i -g gltfjsx
 npx gltfjsx tripod-draco.glb --tranform --types
 # --tranform : 컴포넌트 변환
 # --types : TypeScript 타입 출력
+```
+
+#### 1-2-1. gltfjsx Option
+
+```bash
+Usage
+  $ npx gltfjsx [Model.glb] [options]
+
+Options
+  --output, -o        Output file name/path
+  --types, -t         Add Typescript definitions # 사용
+  --keepnames, -k     Keep original names
+  --keepgroups, -K    Keep (empty) groups, disable pruning
+  --bones, -b         Lay out bones declaratively (default: false)
+  --meta, -m          Include metadata (as userData)
+  --shadows, s        Let meshes cast and receive shadows
+  --printwidth, w     Prettier printWidth (default: 120)
+  --precision, -p     Number of fractional digits (default: 3)
+  --draco, -d         Draco binary path
+  --root, -r          Sets directory from which .gltf file is served
+  --instance, -i      Instance re-occuring geometry
+  --instanceall, -I   Instance every geometry (for cheaper re-use)
+  --exportdefault, -E Use default export
+  --transform, -T     Transform the asset for the web (draco, prune, resize) # 사용
+    --resolution, -R  Resolution for texture resizing (default: 1024)
+    --keepmeshes, -j  Do not join compatible meshes
+    --keepmaterials, -M Do not palette join materials
+    --format, -f      Texture format (default: "webp")
+    --simplify, -S    Mesh simplification (default: false)
+      --ratio         Simplifier ratio (default: 0)
+      --error         Simplifier error threshold (default: 0.0001)
+  --console, -c       Log JSX to console, won't produce a file
+  --debug, -D         Debug output
 ```
 
 ### 1-3. 모델링 수정 프로세스

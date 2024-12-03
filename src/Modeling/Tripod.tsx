@@ -67,7 +67,6 @@ export function Tripod(props: IObjectProps) {
               receiveShadow
               geometry={nodes.body_rubber.geometry}
               material={materials.rubber}
-              material-envMap={env}
             />
             <mesh
               castShadow

@@ -179,7 +179,7 @@ export const Canvas = () => {
           azimuth={0.25}
         />
 
-        <Bvh firstHitOnly>
+        <Bvh firstHitOnly enabled={true}>
           <Selection>
             <Effects hovered={hovered} hover={hover} />
             <ChangeModeling

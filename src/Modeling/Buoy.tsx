@@ -74,12 +74,14 @@ export function Buoy(props: IObjectProps) {
                 receiveShadow
                 geometry={nodes.sun_3.geometry}
                 material={materials.sun_plate_2}
+                material-envMap={env}
               />
               <mesh
                 castShadow
                 receiveShadow
                 geometry={nodes.sun_4.geometry}
                 material={materials.sun_plate_3}
+                material-envMap={env}
               />
             </group>
           </Select>
@@ -89,6 +91,7 @@ export function Buoy(props: IObjectProps) {
             receiveShadow
             geometry={nodes.cap.geometry}
             material={materials.aluminium}
+            material-envMap={env}
           />
         </group>
 
@@ -128,6 +131,7 @@ export function Buoy(props: IObjectProps) {
             <mesh
               geometry={nodes.buoyancy_1_1.geometry}
               material={materials.aluminium}
+              material-envMap={env}
             />
             <mesh
               geometry={nodes.buoyancy_1_3.geometry}
@@ -138,6 +142,7 @@ export function Buoy(props: IObjectProps) {
             <mesh
               geometry={nodes.buoyancy_2_2.geometry}
               material={materials.aluminium}
+              material-envMap={env}
             />
             <mesh
               geometry={nodes.buoyancy_2_3.geometry}
@@ -154,6 +159,7 @@ export function Buoy(props: IObjectProps) {
           <mesh
             geometry={nodes.buoyancy_3_2.geometry}
             material={materials.aluminium}
+            material-envMap={env}
           />
           <mesh
             geometry={nodes.buoyancy_3_3.geometry}
@@ -164,6 +170,7 @@ export function Buoy(props: IObjectProps) {
           <mesh
             geometry={nodes.buoyancy_4_1.geometry}
             material={materials.aluminium}
+            material-envMap={env}
           />
           <mesh
             geometry={nodes.buoyancy_4_2.geometry}
