@@ -9,7 +9,7 @@
     - [1-1. gltf-pipeline](#1-1-gltf-pipeline)
     - [1-2. gltfjsx](#1-2-gltfjsx)
       - [1-2-1. gltfjsx Option](#1-2-1-gltfjsx-option)
-    - [1-3. 모델링 수정 프로세스](#1-3-모델링-수정-프로세스)
+    - [1-3. 모델링 수정 프로세스리](#1-3-모델링-수정-프로세스리)
   - [2. Dependencies](#2-dependencies)
     - [2-1. 사용한 라이브러리](#2-1-사용한-라이브러리)
     - [2-2. Troubleshooting](#2-2-troubleshooting)
@@ -78,7 +78,7 @@ Options
   --debug, -D         Debug output
 ```
 
-### 1-3. 모델링 수정 프로세스
+### 1-3. 모델링 수정 프로세스리
 
 1. 기존 라이노 파일인 `.3dm` → `.fbx ` Export
    - Material 적용 X / Layer만 각 파트에 적용
@@ -123,7 +123,7 @@ Could not load potsdamer_platz_1k.hdr: Failed to fetch
 >
 > 기존의 배포된 사이트의 경우 모델링 페이지 로드 불가
 
-해결 방안으로 개발자 도구의 네트워크 탭에서 불러오기를 시도하는 파일 명을 아래 사이트를 통해 리스소 다운로드 및 파일 경로를 통해 환경 이미지 설정 진행
+해결 방안으로 개발자 도구의 네트워크 탭에서 불러오기를 시도하는 파일 명을 아래 사이트를 통해 리소스 다운로드 및 파일 경로를 통해 환경 이미지 설정 진행
 
 > [!TIP]
 >
