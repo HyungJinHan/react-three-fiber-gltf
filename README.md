@@ -78,7 +78,7 @@ Options
   --debug, -D         Debug output
 ```
 
-### 1-3. 모델링 수정 프로세스리
+### 1-3. 모델링 수정 프로세스
 
 1. 기존 라이노 파일인 `.3dm` → `.fbx ` Export
    - Material 적용 X / Layer만 각 파트에 적용
