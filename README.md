@@ -9,7 +9,7 @@
     - [1-1. gltf-pipeline](#1-1-gltf-pipeline)
     - [1-2. gltfjsx](#1-2-gltfjsx)
       - [1-2-1. gltfjsx Option](#1-2-1-gltfjsx-option)
-    - [1-3. 모델링 수정 프로세스리](#1-3-모델링-수정-프로세스리)
+    - [1-3. 모델링 수정 프로세스](#1-3-모델링-수정-프로세스)
   - [2. Dependencies](#2-dependencies)
     - [2-1. 사용한 라이브러리](#2-1-사용한-라이브러리)
     - [2-2. Troubleshooting](#2-2-troubleshooting)
