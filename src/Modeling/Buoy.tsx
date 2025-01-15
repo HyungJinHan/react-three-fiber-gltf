@@ -193,7 +193,7 @@ export function Buoy(props: IObjectProps) {
       </group>
 
       <Text {...props.text}>
-        {props.hovered ? props.hovered : "스마트 부표"}
+        {props.hovered ? props.hovered : "부표형 디바이스"}
       </Text>
 
       <Description value={descripiton} group={props.desciption} />

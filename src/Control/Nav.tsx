@@ -34,8 +34,9 @@ const Nav = (props: IProps) => {
     <NavBar>
       <NavLinkWrapper>
         <NavLink onClick={() => props.hover("")} to={"/"}>
-          스마트 부표
+          부표형
         </NavLink>
+        <NavLink to={"/mount"}>마운트형</NavLink>
         <NavLink to={"/tripod"}>트라이포드 센서</NavLink>
       </NavLinkWrapper>
     </NavBar>

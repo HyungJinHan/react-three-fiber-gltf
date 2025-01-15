@@ -54,6 +54,38 @@ type BuoyProps = {
   };
 };
 
+type MountProps = {
+  Nodes: {
+    cap: THREE.Mesh;
+    sun_1: THREE.Mesh;
+    sun_2: THREE.Mesh;
+    sun_3: THREE.Mesh;
+    sun_4: THREE.Mesh;
+    sun_5: THREE.Mesh;
+    rubber: THREE.Mesh;
+    inside: THREE.Mesh;
+    hinge_front: THREE.Mesh;
+    hinge_back: THREE.Mesh;
+    bolt: THREE.Mesh;
+    bolt_inside: THREE.Mesh;
+    guard: THREE.Mesh;
+    antenna_cover: THREE.Mesh;
+    body_inside: THREE.Mesh;
+    antenna: THREE.Mesh;
+  };
+  Materials: {
+    aluminium: THREE.MeshStandardMaterial;
+    sun_plate_1: THREE.MeshStandardMaterial;
+    sun_plate_2: THREE.MeshStandardMaterial;
+    sun_plate_3: THREE.MeshStandardMaterial;
+    sun_cell_2: THREE.MeshStandardMaterial;
+    sun_cell_1: THREE.MeshStandardMaterial;
+    rubber: THREE.MeshPhysicalMaterial;
+    metal: THREE.MeshStandardMaterial;
+    plastic_black: THREE.MeshStandardMaterial;
+  };
+};
+
 type TripodProps = {
   Nodes: {
     body_cable_connect: THREE.Mesh;
@@ -133,6 +165,12 @@ export type IModeling = {
   tripod: GLTF & {
     nodes: TripodProps["Nodes"];
     materials: TripodProps["Materials"];
+    animations?: GLTFAction[];
+  };
+
+  mount: GLTF & {
+    nodes: MountProps["Nodes"];
+    materials: MountProps["Materials"];
     animations?: GLTFAction[];
   };
 };

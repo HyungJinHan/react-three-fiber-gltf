@@ -8,6 +8,7 @@ import Light from "../Effects/Light";
 import Loading from "../Effects/Loading";
 import { IObjectProps } from "../interfaces";
 import { Buoy } from "../Modeling/Buoy";
+import { Mount } from "../Modeling/Mount";
 import { Tripod } from "../Modeling/Tripod";
 import { isMobile } from "../utils/isMobile";
 import Nav from "./Nav";
@@ -81,6 +82,18 @@ const ChangeModeling = (props: IProps) => {
       hover: props.hover,
       ...defaultProps.desktop,
     },
+    mount: {
+      modeling: {
+        scale: 0.004,
+        position: [0.3, -0.58, 0.5],
+        rotation: [0.05, 0.2, 0],
+      },
+      height: "100vh",
+      width: "100%",
+      hovered: props.hovered,
+      hover: props.hover,
+      ...defaultProps.desktop,
+    },
     tripod: {
       modeling: {
         scale: 0.004,
@@ -101,6 +114,18 @@ const ChangeModeling = (props: IProps) => {
         scale: 0.0012,
         position: [0, -0.7, -0.5],
         rotation: [0.1, Math.PI / 5, 0],
+      },
+      height: "100vh",
+      width: "100%",
+      hovered: props.hovered,
+      hover: props.hover,
+      ...defaultProps.mobile,
+    },
+    mount: {
+      modeling: {
+        scale: 0.0028,
+        position: [-0.37, -0.77, 0.5],
+        rotation: [0.1, Math.PI / 8, 0],
       },
       height: "100vh",
       width: "100%",
@@ -130,6 +155,17 @@ const ChangeModeling = (props: IProps) => {
             {...(isMobile
               ? { ...(mobileModelingProps.buoy as IObjectProps) }
               : { ...(modelingProps.buoy as IObjectProps) })}
+          />
+        </Suspense>
+      );
+
+    case "/mount":
+      return (
+        <Suspense fallback={<Loading />}>
+          <Mount
+            {...(isMobile
+              ? { ...(mobileModelingProps.mount as IObjectProps) }
+              : { ...(modelingProps.mount as IObjectProps) })}
           />
         </Suspense>
       );
