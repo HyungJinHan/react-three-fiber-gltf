@@ -1,4 +1,5 @@
 import { Text, useEnvironment, useGLTF } from "@react-three/drei";
+import { MeshProps } from "@react-three/fiber";
 import { Select } from "@react-three/postprocessing";
 import React from "react";
 import { IModeling, IObjectProps } from "../interfaces";
@@ -6,8 +7,13 @@ import { isMobile } from "../utils/isMobile";
 import { usePointEvent } from "../utils/pointEvent";
 import { Description } from "./Description";
 
-// const modelingPath = "/modeling/buoy/animation/buoy-draco.glb";
-const modelingPath = "/modeling/mount/mount-draco.glb";
+const partMoveProps = {
+  position: [355, 150, 0],
+  rotation: [Math.PI / 2, -Math.PI / 2, 0],
+  scale: 0.4,
+};
+
+const modelingPath = "/modeling/mount/mount-hinge-fix-draco.glb";
 
 export function Mount(props: IObjectProps) {
   // const navigate = useNavigate();
@@ -47,7 +53,7 @@ export function Mount(props: IObjectProps) {
               />
               <mesh
                 geometry={nodes.sun_2.geometry}
-                material={materials.sun_plate_2}
+                material={materials.aluminium}
               />
               <mesh
                 geometry={nodes.sun_3.geometry}
@@ -83,6 +89,7 @@ export function Mount(props: IObjectProps) {
             <mesh
               geometry={nodes.hinge_front.geometry}
               material={materials.metal}
+              {...(partMoveProps as MeshProps)}
             />
             <mesh
               geometry={nodes.hinge_back.geometry}

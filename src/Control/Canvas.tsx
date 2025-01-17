@@ -84,7 +84,7 @@ const ChangeModeling = (props: IProps) => {
     },
     mount: {
       modeling: {
-        scale: 0.004,
+        scale: 0.0043,
         position: [0.3, -0.58, 0.5],
         rotation: [0.05, 0.2, 0],
       },
