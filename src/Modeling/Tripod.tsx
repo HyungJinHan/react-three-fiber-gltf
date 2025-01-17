@@ -16,16 +16,16 @@ export function Tripod(props: IObjectProps) {
 
   const descripiton =
     {
-      "트라이포드 콤보":
-        "이거슨 트라이포드 센서 콤보입니다. 왜 콤보냐구요? 저도 그냥 생각난대로 작성한거라 상관 없어요. 확정 아니거든요.",
-      "용존산소 센서 (단일)":
-        "이거슨 용존산소 단일 센서입니다. 용존산소만 단일로 측정하는 센서구요. 수온과 함께 데이터가 들어와요.",
-      "전기전도도 센서 (단일)":
-        "이거슨 전기전도도 단일 센서입니다. 전기전도도 측정에 필요한 수치들을 전부 확인할 수 있어요. 마찬가지로 수온도 있답니다.",
+      "멀티 프로브 수질 계측 센서":
+        "오든이 제공하는 멀티 프로브 디지털 센서는 수온, 용존산소, 염도, pH, 전기전도도, ORP, 산화환원전위, 탁도 등의 지표를 최소 1초 간격으로 다양한 지표를 동시에 측정하여 RS485 MODBUS, SDI12 프로토콜을 통해 데이터 교환을 제공합니다.",
+      "단일 센서 (용존산소)":
+        "오든이 제공하는 단일 프로브평 디지털 센서는 수온, 용존산소, 염도, pH, 클로로필II, BGA 등 다양한 지표의 측정을 지원합니다. 본 자료의 센서는 용존산소와 수온 동시 계측 단일센서입니다.",
+      "단일 센서 (염도)":
+        "오든이 제공하는 단일 프로브평 디지털센서는 수온, 용존산소, 염도, pH, 클로로필II, BGA 등 다양한 지표의 측정을 지원합니다. 본 자료의 센서는 염도와 수온 동시 계측 단일센서입니다.",
     }[props.hovered] ??
     `${
       isMobile ? "터치를 통해" : "마우스를 올려서"
-    } 트라이포드 센서의 정보를 확인하세요.`;
+    } 디바이스의 정보를 확인하세요.`;
 
   useEnvironment.preload({ ...props.env });
 
@@ -33,7 +33,11 @@ export function Tripod(props: IObjectProps) {
     <React.Fragment>
       <group {...props.modeling} dispose={null}>
         <Select
-          {...usePointEvent(props.hovered, props.hover, "트라이포드 콤보")}>
+          {...usePointEvent(
+            props.hovered,
+            props.hover,
+            "멀티 프로브 수질 계측 센서"
+          )}>
           <group>
             <mesh
               castShadow
@@ -98,7 +102,7 @@ export function Tripod(props: IObjectProps) {
           {...usePointEvent(
             props.hovered,
             props.hover,
-            "용존산소 센서 (단일)"
+            "단일 센서 (용존산소)"
           )}>
           <group rotation={[0, 0.1, 0]} position={[10, -20, 40]}>
             <mesh
@@ -120,11 +124,7 @@ export function Tripod(props: IObjectProps) {
         </Select>
 
         <Select
-          {...usePointEvent(
-            props.hovered,
-            props.hover,
-            "전기전도도 센서 (단일)"
-          )}>
+          {...usePointEvent(props.hovered, props.hover, "단일 센서 (염도)")}>
           <group position={[10, 0, -40]}>
             <mesh
               geometry={nodes.conductivity_sensor_1.geometry}
@@ -146,7 +146,7 @@ export function Tripod(props: IObjectProps) {
       </group>
 
       <Text {...props.text}>
-        {props.hovered ? props.hovered : "트라이포드 센서"}
+        {props.hovered ? props.hovered : "수질 계측 센서"}
       </Text>
 
       <Description value={descripiton} group={props.desciption} />

@@ -1,5 +1,5 @@
 import { Text, useEnvironment, useGLTF } from "@react-three/drei";
-import { MeshProps } from "@react-three/fiber";
+import { GroupProps, MeshProps } from "@react-three/fiber";
 import { Select } from "@react-three/postprocessing";
 import React from "react";
 import { IModeling, IObjectProps } from "../interfaces";
@@ -8,36 +8,45 @@ import { usePointEvent } from "../utils/pointEvent";
 import { Description } from "./Description";
 
 const partMoveProps = {
-  position: [355, 150, 0],
-  rotation: [Math.PI / 2, -Math.PI / 2, 0],
-  scale: 0.4,
+  hinge: {
+    position: [355, 150, 0],
+    rotation: [Math.PI / 2, -Math.PI / 2, 0],
+    scale: 0.4,
+  },
+  guard: {
+    position: [50, 0, 30],
+    rotation: [0, -0.13, 0],
+    // scale: 0.4,
+  },
 };
 
 const modelingPath = "/modeling/mount/mount-hinge-fix-draco.glb";
+const guardPath = "/modeling/mount/guard-text-draco.glb";
 
 export function Mount(props: IObjectProps) {
-  // const navigate = useNavigate();
-
   const { nodes, materials /** animations */ } = useGLTF(
     modelingPath
   ) as IModeling["mount"];
 
-  // const { ref, actions } = useAnimations(animations);
+  const { nodes: guardNodes, materials: guardMaterials /** animations */ } =
+    useGLTF(guardPath) as IModeling["guard"];
 
-  // const env = useEnvironment({ preset: "city" });
   const env = useEnvironment({ ...props.env });
 
   const descripiton =
     {
-      "태양광 패널":
-        "이거슨 태양광입니다. 멋지죠? 저도 멋지다고 생각합니다. 모델링 재질 정하는데 태양광을 제일 고민해봤는데, 페이지에서는 잘 안보이네요. 그래도 좋아요.",
-      본체: "이거슨 본체입니다. 멋지죠? 저도 멋지다고 생각합니다. 알루미늄으로 만들어졌어요. 내부에 배터리하고 센서가 들어가 있어서 소듕하게 다뤄야해요. 아시겠죠? 그렇다면 내부에 들어간 센서를 확인해보고 싶죠? 트라이포드 센서 페이지에서 확인하세여.",
-      안테나:
-        "이거슨 안테나입니다. 멋지죠? 저도 멋지다고 생각합니다. 그렇게 보이지는 않지만 안테나 맞아요.",
+      "재생 에너지 솔루션":
+        "60Wh급 태양광 패널과 리튬인산철 배터리의 공동 적용과 ESS 에너지 보관 및 운영 기능을 통해 해상 환경에서 안정적인 전력 운영을 지원합니다.",
+      "부표 전장품 탑재부":
+        "밀폐성능을 확보한 디바이스 본체는 다양한 전장품을 탑재를 통해 기능적 확장을 지원합니다. 100L급의 전장품 탑재 공간을 지원합니다.",
+      "고감도 멀티 안테나":
+        "LTE, GNSS, 2.4G(WIFI/블루투스), LoRa 등 수요 기반한 방수형 안테나 솔루션을 제공합니다.",
+      "안내문 및 광고 패널":
+        "외부 부착형 광고 패널 기능을 통해 관측 기기 운영 기관 정보 및 훼손 방지를 위한 경고문과 다양한 광고 기능을 제공합니다.",
     }[props.hovered] ??
     `${
       isMobile ? "터치를 통해" : "마우스를 올려서"
-    } 스마트 부표의 정보를 확인하세요.`;
+    } 디바이스의 정보를 확인하세요.`;
 
   useEnvironment.preload({ ...props.env });
 
@@ -45,7 +54,12 @@ export function Mount(props: IObjectProps) {
     <React.Fragment>
       <group {...props.modeling} dispose={null}>
         <group>
-          <Select {...usePointEvent(props.hovered, props.hover, "태양광 패널")}>
+          <Select
+            {...usePointEvent(
+              props.hovered,
+              props.hover,
+              "재생 에너지 솔루션"
+            )}>
             <group>
               <mesh
                 geometry={nodes.sun_1.geometry}
@@ -89,7 +103,7 @@ export function Mount(props: IObjectProps) {
             <mesh
               geometry={nodes.hinge_front.geometry}
               material={materials.metal}
-              {...(partMoveProps as MeshProps)}
+              {...(partMoveProps.hinge as MeshProps)}
             />
             <mesh
               geometry={nodes.hinge_back.geometry}
@@ -107,7 +121,8 @@ export function Mount(props: IObjectProps) {
           </group>
         </group>
 
-        <Select {...usePointEvent(props.hovered, props.hover, "본체")}>
+        <Select
+          {...usePointEvent(props.hovered, props.hover, "부표 전장품 탑재부")}>
           <mesh
             castShadow
             receiveShadow
@@ -121,7 +136,8 @@ export function Mount(props: IObjectProps) {
           />
         </Select>
 
-        <Select {...usePointEvent(props.hovered, props.hover, "안테나")}>
+        <Select
+          {...usePointEvent(props.hovered, props.hover, "고감도 멀티 안테나")}>
           <mesh
             castShadow
             receiveShadow
@@ -129,10 +145,32 @@ export function Mount(props: IObjectProps) {
             material={materials.plastic_black}
           />
         </Select>
+
+        <Select
+          {...usePointEvent(props.hovered, props.hover, "안내문 및 광고 패널")}>
+          <group {...(partMoveProps.guard as GroupProps)}>
+            <mesh
+              geometry={guardNodes.guard_body.geometry}
+              material={guardMaterials.aluminium}
+            />
+            <mesh
+              geometry={guardNodes.desc_2.geometry}
+              material={guardMaterials.rubber}
+            />
+            <mesh
+              geometry={guardNodes.desc_1.geometry}
+              material={guardMaterials.rubber}
+            />
+            <mesh
+              geometry={guardNodes.title.geometry}
+              material={guardMaterials.rubber}
+            />
+          </group>
+        </Select>
       </group>
 
       <Text {...props.text}>
-        {props.hovered ? props.hovered : "마운트형 디바이스"}
+        {props.hovered ? props.hovered : "해양 환경 계장(계측) 제어장치"}
       </Text>
 
       <Description value={descripiton} group={props.desciption} />

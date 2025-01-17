@@ -6,8 +6,7 @@ export const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Canvas />} />
-        <Route path="/mount" element={<Canvas />} />
-        <Route path="/tripod" element={<Canvas />} />
+        <Route path="/sensor" element={<Canvas />} />
       </Routes>
     </BrowserRouter>
   );

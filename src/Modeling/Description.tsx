@@ -6,13 +6,13 @@ export const Description = (props: IDescriptionProps) => {
   return (
     <group {...props.group}>
       <Text
-        maxWidth={1.5}
+        maxWidth={2.8}
         lineHeight={1.7}
         anchorY="top"
         textAlign={isMobile ? "center" : "left"}
         position={[0, 0.5, 0.8]}
         color={"black"}
-        fontSize={0.08}
+        fontSize={0.1}
         font="GmarketSansTTFMedium.ttf">
         {props.value}
       </Text>

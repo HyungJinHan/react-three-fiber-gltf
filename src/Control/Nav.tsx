@@ -26,18 +26,15 @@ const NavLink = styled(Link)`
 `;
 
 interface IProps {
-  hover: React.Dispatch<React.SetStateAction<string>>;
+  hover?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const Nav = (props: IProps) => {
   return (
     <NavBar>
       <NavLinkWrapper>
-        <NavLink onClick={() => props.hover("")} to={"/"}>
-          부표형
-        </NavLink>
-        <NavLink to={"/mount"}>마운트형</NavLink>
-        <NavLink to={"/tripod"}>트라이포드 센서</NavLink>
+        <NavLink to={"/"}>DEVICE</NavLink>
+        <NavLink to={"/sensor"}>SENSOR</NavLink>
       </NavLinkWrapper>
     </NavBar>
   );

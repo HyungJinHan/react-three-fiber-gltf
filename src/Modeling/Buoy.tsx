@@ -29,19 +29,18 @@ export function Buoy(props: IObjectProps) {
 
   const descripiton =
     {
-      "태양광 패널":
-        "이거슨 태양광입니다. 멋지죠? 저도 멋지다고 생각합니다. 모델링 재질 정하는데 태양광을 제일 고민해봤는데, 페이지에서는 잘 안보이네요. 그래도 좋아요.",
-      "미끄럼 방지 패드":
-        "이거슨 미끄럼 방지 패드입니다. 멋지죠? 저도 멋지다고 생각합니다. 고무같기도 하고 재질이 정확히 뭔지는 모르겠네요.",
-      부력제:
-        "이거슨 부력제입니다. 멋지죠? 저도 멋지다고 생각합니다. 처음에 이거 봤을 때, 게임 장비처럼 보여서 멋있었어요.",
-      본체: "이거슨 본체입니다. 멋지죠? 저도 멋지다고 생각합니다. 알루미늄으로 만들어졌어요. 내부에 배터리하고 센서가 들어가 있어서 소듕하게 다뤄야해요. 아시겠죠? 그렇다면 내부에 들어간 센서를 확인해보고 싶죠? 트라이포드 센서 페이지에서 확인하세여.",
-      안테나:
-        "이거슨 안테나입니다. 멋지죠? 저도 멋지다고 생각합니다. 그렇게 보이지는 않지만 안테나 맞아요.",
+      "재생 에너지 솔루션":
+        "60Wh급 태양광 패널과 리튬인산철 배터리의 공동 적용과 ESS 에너지 보관 및 운영 기능을 통해 해상 환경에서 안정적인 전력 운영을 지원합니다.",
+      "보조 부력재":
+        "가혹 조건인 해양 환경에 적용 안정성 확보를 위하여 보조 부력재 시스템을 적용했습니다. 알루미늄 소재, FRP 소재 등 다양한 소재의 부력재를 제공합니다.",
+      "부표 전장품 탑재부":
+        "밀폐성능을 확보한 부표 본체는 다양한 전장품을 탑재를 통해 기능적 확장을 지원합니다. 60L급의 전장품 탑재 공간을 지원합니다.",
+      "고감도 멀티 안테나":
+        "LTE, GNSS, 2.4G(WIFI/블루투스), LoRa 등 수요 기반한 방수형 안테나 솔루션을 제공합니다.",
     }[props.hovered] ??
     `${
       isMobile ? "터치를 통해" : "마우스를 올려서"
-    } 스마트 부표의 정보를 확인하세요.`;
+    } 디바이스의 정보를 확인하세요.`;
 
   useEnvironment.preload({ ...props.env });
 
@@ -49,7 +48,12 @@ export function Buoy(props: IObjectProps) {
     <React.Fragment>
       <group {...props.modeling} dispose={null}>
         <group>
-          <Select {...usePointEvent(props.hovered, props.hover, "태양광 패널")}>
+          <Select
+            {...usePointEvent(
+              props.hovered,
+              props.hover,
+              "재생 에너지 솔루션"
+            )}>
             <group>
               <mesh
                 castShadow
@@ -104,7 +108,8 @@ export function Buoy(props: IObjectProps) {
           material={materials.rubber}
         />
 
-        <Select {...usePointEvent(props.hovered, props.hover, "본체")}>
+        <Select
+          {...usePointEvent(props.hovered, props.hover, "부표 전장품 탑재부")}>
           <mesh
             castShadow
             receiveShadow
@@ -114,19 +119,19 @@ export function Buoy(props: IObjectProps) {
           />
         </Select>
 
-        <Select
-          {...usePointEvent(props.hovered, props.hover, "미끄럼 방지 패드")}>
-          <mesh
-            geometry={nodes.buoyancy_1_2.geometry}
-            material={materials.rubber}
-          />
-          <mesh
-            {...(partMoveProps as MeshProps)}
-            geometry={nodes.buoyancy_2_1.geometry}
-            material={materials.rubber}
-          />
-        </Select>
-        <Select {...usePointEvent(props.hovered, props.hover, "부력제")}>
+        {/* <Select
+          {...usePointEvent(props.hovered, props.hover, "미끄럼 방지 패드")}> */}
+        <mesh
+          geometry={nodes.buoyancy_1_2.geometry}
+          material={materials.rubber}
+        />
+        <mesh
+          {...(partMoveProps as MeshProps)}
+          geometry={nodes.buoyancy_2_1.geometry}
+          material={materials.rubber}
+        />
+        {/* </Select> */}
+        <Select {...usePointEvent(props.hovered, props.hover, "보조 부력재")}>
           <group>
             <mesh
               geometry={nodes.buoyancy_1_1.geometry}
@@ -182,7 +187,8 @@ export function Buoy(props: IObjectProps) {
           />
         </group>
 
-        <Select {...usePointEvent(props.hovered, props.hover, "안테나")}>
+        <Select
+          {...usePointEvent(props.hovered, props.hover, "고감도 멀티 안테나")}>
           <mesh
             castShadow
             receiveShadow
@@ -193,7 +199,7 @@ export function Buoy(props: IObjectProps) {
       </group>
 
       <Text {...props.text}>
-        {props.hovered ? props.hovered : "부표형 디바이스"}
+        {props.hovered ? props.hovered : "알루미늄 스마트 부표"}
       </Text>
 
       <Description value={descripiton} group={props.desciption} />

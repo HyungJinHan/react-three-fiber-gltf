@@ -123,6 +123,19 @@ type TripodProps = {
   };
 };
 
+type GuardProps = {
+  Nodes: {
+    guard_body: THREE.Mesh;
+    desc_2: THREE.Mesh;
+    desc_1: THREE.Mesh;
+    title: THREE.Mesh;
+  };
+  Materials: {
+    aluminium: THREE.MeshStandardMaterial;
+    rubber: THREE.MeshPhysicalMaterial;
+  };
+};
+
 interface GLTFAction extends THREE.AnimationClip {
   name: ActionName;
 }
@@ -171,6 +184,12 @@ export type IModeling = {
   mount: GLTF & {
     nodes: MountProps["Nodes"];
     materials: MountProps["Materials"];
+    animations?: GLTFAction[];
+  };
+
+  guard: GLTF & {
+    nodes: GuardProps["Nodes"];
+    materials: GuardProps["Materials"];
     animations?: GLTFAction[];
   };
 };
