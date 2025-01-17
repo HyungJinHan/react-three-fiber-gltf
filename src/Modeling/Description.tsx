@@ -13,7 +13,7 @@ export const Description = (props: IDescriptionProps) => {
         position={[0, 0.5, 0.8]}
         color={"black"}
         fontSize={0.1}
-        font="GmarketSansTTFMedium.ttf">
+        font="GmarketSansTTFBold.ttf">
         {props.value}
       </Text>
 
