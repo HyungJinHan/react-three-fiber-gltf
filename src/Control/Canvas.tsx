@@ -9,6 +9,7 @@ import Light from "../Effects/Light";
 import Loading from "../Effects/Loading";
 import { IObjectProps } from "../interfaces";
 import { Buoy } from "../Modeling/Buoy";
+import { DspBoard } from "../Modeling/DspBoard";
 import { Mount } from "../Modeling/Mount";
 import { Tripod } from "../Modeling/Tripod";
 import { isMobile } from "../utils/isMobile";
@@ -129,6 +130,32 @@ const ChangeModeling = (props: IProps) => {
       hover: hover,
       ...defaultProps.desktop,
     },
+    dsp: {
+      front: {
+        modeling: {
+          scale: 0.012,
+          position: [1.3, -0.55, 0],
+          rotation: [0, 2, 0],
+        },
+        height: "100vh",
+        width: "100%",
+        hovered: hovered,
+        hover: hover,
+        ...defaultProps.desktop,
+      },
+      back: {
+        modeling: {
+          scale: 0.012,
+          position: [1.9, -0.55, -0.5],
+          rotation: [0, 4.1, 0],
+        },
+        height: "100vh",
+        width: "100%",
+        hovered: hovered,
+        hover: hover,
+        ...defaultProps.desktop,
+      },
+    },
   };
 
   const mobileModelingProps = {
@@ -157,6 +184,18 @@ const ChangeModeling = (props: IProps) => {
       ...defaultProps.mobile,
     },
     tripod: {
+      modeling: {
+        scale: 0.0035,
+        position: [0.1, -0.92, -0.1],
+        rotation: [Math.PI, 0, Math.PI],
+      },
+      height: "100vh",
+      width: "100%",
+      hovered: hovered,
+      hover: hover,
+      ...defaultProps.mobile,
+    },
+    dsp: {
       modeling: {
         scale: 0.0035,
         position: [0.1, -0.92, -0.1],
@@ -208,6 +247,23 @@ const ChangeModeling = (props: IProps) => {
         </Suspense>
       );
 
+    case "dsp-board":
+      return (
+        <Suspense fallback={<Loading />}>
+          <Effects hovered={hovered} hover={hover} />
+          <DspBoard
+            {...(isMobile
+              ? { ...(mobileModelingProps.dsp as IObjectProps) }
+              : { ...(modelingProps.dsp.front as IObjectProps) })}
+          />
+          <DspBoard
+            {...(isMobile
+              ? { ...(mobileModelingProps.dsp as IObjectProps) }
+              : { ...(modelingProps.dsp.back as IObjectProps) })}
+          />
+        </Suspense>
+      );
+
     default:
       return (
         <Suspense fallback={<Loading />}>
@@ -225,7 +281,12 @@ const ChangeModeling = (props: IProps) => {
 export const Canvas = () => {
   const location = useLocation();
 
-  const type = location.pathname === "/" ? ["buoy", "mount"] : ["sensor"];
+  const type =
+    location.pathname === "/"
+      ? ["buoy", "mount"]
+      : location.pathname === "/sensor"
+      ? ["sensor"]
+      : ["dsp-board"];
 
   return (
     <CanvasWrapper>
@@ -237,7 +298,7 @@ export const Canvas = () => {
             flat
             dpr={[1, 1.5]}
             gl={{ antialias: false }}
-            camera={{ position: [0, 1, 6], fov: 13, near: 1, far: 20 }}>
+            camera={{ position: [0, 1, 6], fov: 18, near: 1, far: 20 }}>
             <Light />
             <Sky
               distance={45}

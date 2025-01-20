@@ -35,6 +35,7 @@ const Nav = (props: IProps) => {
       <NavLinkWrapper>
         <NavLink to={"/"}>DEVICE</NavLink>
         <NavLink to={"/sensor"}>SENSOR</NavLink>
+        <NavLink to={"/dsp-board"}>DSP BOARD</NavLink>
       </NavLinkWrapper>
     </NavBar>
   );

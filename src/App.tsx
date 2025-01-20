@@ -7,6 +7,7 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Canvas />} />
         <Route path="/sensor" element={<Canvas />} />
+        <Route path="/dsp-board" element={<Canvas />} />
       </Routes>
     </BrowserRouter>
   );

@@ -49,13 +49,13 @@ export default function Effects(props: IHover) {
       />
       <Outline
         // visibleEdgeColor={0x1877f2} // blue
-        visibleEdgeColor={0x00d4ff} // blue
+        visibleEdgeColor={0xf15b2a} // orange
         // hiddenEdgeColor={0x0066a2} // blue
         // visibleEdgeColor={0xffffff} // white
         hiddenEdgeColor={0x0b0b0b} // gray
-        blur={true}
+        // blur={true}
         // width={size.width * 5}
-        edgeStrength={10}
+        edgeStrength={30}
       />
       <TiltShift2 samples={5} blur={0.03} />
       <ToneMapping />

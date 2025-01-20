@@ -123,6 +123,62 @@ type TripodProps = {
   };
 };
 
+type DspBoardProps = {
+  Nodes: {
+    ant_1_1: THREE.Mesh;
+    ant_1_2: THREE.Mesh;
+    ant_1_3: THREE.Mesh;
+    ant_2_1: THREE.Mesh;
+    ant_2_2: THREE.Mesh;
+    ant_3_1: THREE.Mesh;
+    ant_3_2: THREE.Mesh;
+    ant_3_3: THREE.Mesh;
+    c_type_1_1: THREE.Mesh;
+    c_type_1_2: THREE.Mesh;
+    c_type_2_1: THREE.Mesh;
+    c_type_2_2: THREE.Mesh;
+    ethernet_1_1: THREE.Mesh;
+    ethernet_1_2: THREE.Mesh;
+    ethernet_1_3: THREE.Mesh;
+    ethernet_1_4: THREE.Mesh;
+    ethernet_2_1: THREE.Mesh;
+    ethernet_2_2: THREE.Mesh;
+    ethernet_3_1: THREE.Mesh;
+    ethernet_3_2: THREE.Mesh;
+    sensor_1_1: THREE.Mesh;
+    sensor_1_2: THREE.Mesh;
+    sensor_2_1: THREE.Mesh;
+    sensor_2_2: THREE.Mesh;
+    board_bottom: THREE.Mesh;
+    power_1: THREE.Mesh;
+    power_2: THREE.Mesh;
+    bolt_1: THREE.Mesh;
+    bolt_2: THREE.Mesh;
+    bolt_3: THREE.Mesh;
+    bolt_4: THREE.Mesh;
+    bolt_5: THREE.Mesh;
+    bolt_6: THREE.Mesh;
+    bolt_7: THREE.Mesh;
+    bolt_8: THREE.Mesh;
+    case_side_2: THREE.Mesh;
+    case_bottom: THREE.Mesh;
+    case_side_1: THREE.Mesh;
+    case_bottom_hole: THREE.Mesh;
+    case_cap: THREE.Mesh;
+  };
+  Materials: {
+    white: THREE.MeshStandardMaterial;
+    ant: THREE.MeshStandardMaterial;
+    metal_silver: THREE.MeshStandardMaterial;
+    black: THREE.MeshStandardMaterial;
+    yellow: THREE.MeshStandardMaterial;
+    green: THREE.MeshStandardMaterial;
+    sensor_2: THREE.MeshStandardMaterial;
+    metal_black: THREE.MeshStandardMaterial;
+    bolt: THREE.MeshStandardMaterial;
+  };
+};
+
 type GuardProps = {
   Nodes: {
     guard_body: THREE.Mesh;
@@ -184,6 +240,12 @@ export type IModeling = {
   mount: GLTF & {
     nodes: MountProps["Nodes"];
     materials: MountProps["Materials"];
+    animations?: GLTFAction[];
+  };
+
+  dsp: GLTF & {
+    nodes: DspBoardProps["Nodes"];
+    materials: DspBoardProps["Materials"];
     animations?: GLTFAction[];
   };
 
