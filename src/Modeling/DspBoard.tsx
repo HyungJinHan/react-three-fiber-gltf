@@ -1,10 +1,17 @@
 import { Text, useEnvironment, useGLTF } from "@react-three/drei";
+import { MeshProps } from "@react-three/fiber";
 import { Select } from "@react-three/postprocessing";
 import React from "react";
 import { IModeling, IObjectProps } from "../interfaces";
 import { isMobile } from "../utils/isMobile";
 import { usePointEvent } from "../utils/pointEvent";
 import { Description } from "./Description";
+
+const partMoveProps = {
+  // scale: 0.99,
+  // rotation: [0, 0.5, 0],
+  position: [0, 0.3, 0],
+};
 
 // const modelingPath = "/modeling/buoy/animation/buoy-draco.glb";
 const modelingPath = "/modeling/dsp-board/dsp-board-draco.glb";
@@ -212,6 +219,7 @@ export function DspBoard(props: IObjectProps) {
           <mesh
             geometry={nodes.case_cap.geometry}
             material={materials.metal_black}
+            {...(partMoveProps as MeshProps)}
           />
         </group>
       </group>
