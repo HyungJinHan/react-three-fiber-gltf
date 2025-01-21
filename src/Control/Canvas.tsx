@@ -33,15 +33,17 @@ export const Canvas = () => {
   const location = useLocation();
 
   const adjustFov = () => {
-    let innerWidth = window.innerWidth / 100;
-    let innerHeight = window.innerHeight / 100;
+    let innerWidth = Math.floor(window.innerWidth / 100);
+    let innerHeight = Math.floor(window.innerHeight / 100);
+
+    console.log(innerWidth);
 
     if (!isMobile) {
       if (20 < innerWidth) {
         return 18;
       } else if (12 < innerWidth) {
         return 15;
-      } else if (innerWidth < 5) {
+      } else if (innerWidth < 10) {
         return 30;
       } else if (15 < innerHeight) {
         return 30;
