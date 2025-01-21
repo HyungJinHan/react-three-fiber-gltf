@@ -49,7 +49,7 @@ export const Loader = (props: IProps) => {
         // files: "/environment/venice_sunset_1k.hdr", // sunset
       },
       text: {
-        position: [0, 1.23, -0.5],
+        position: [0, 0.7, -0.5],
         color: "black",
         fontSize: 0.15,
         font: "GmarketSansTTFBold.ttf",
@@ -134,8 +134,8 @@ export const Loader = (props: IProps) => {
   const mobileModelingProps = {
     buoy: {
       modeling: {
-        scale: 0.0012,
-        position: [0, -0.7, -0.5],
+        scale: 0.0013,
+        position: [0, -0.57, -0.5],
         rotation: [0.1, Math.PI / 5, 0],
       },
       height: "100vh",
@@ -146,9 +146,9 @@ export const Loader = (props: IProps) => {
     },
     mount: {
       modeling: {
-        scale: 0.0028,
-        position: [-0.37, -0.77, 0.5],
-        rotation: [0.1, Math.PI / 8, 0],
+        scale: 0.0032,
+        position: [-0.62, -0.65, 0.5],
+        rotation: [0.1, 0.2, 0],
       },
       height: "100vh",
       width: "100%",
@@ -158,8 +158,8 @@ export const Loader = (props: IProps) => {
     },
     tripod: {
       modeling: {
-        scale: 0.0035,
-        position: [0.1, -0.92, -0.1],
+        scale: 0.0037,
+        position: [0.1, -0.82, -0.1],
         rotation: [Math.PI, 0, Math.PI],
       },
       height: "100vh",
@@ -171,8 +171,8 @@ export const Loader = (props: IProps) => {
     dsp: {
       front: {
         modeling: {
-          scale: 0.009,
-          position: [0.1, -0.73, -0.5],
+          scale: 0.008,
+          position: [0, -0.63, -0.5],
           rotation: [0, 2, 0],
         },
         height: "100vh",
@@ -183,8 +183,8 @@ export const Loader = (props: IProps) => {
       },
       back: {
         modeling: {
-          scale: 0.009,
-          position: [0.6, -0.73, -0.8],
+          scale: 0.008,
+          position: [0.4, -0.63, -0.8],
           rotation: [0, 4.1, 0],
         },
         height: "100vh",

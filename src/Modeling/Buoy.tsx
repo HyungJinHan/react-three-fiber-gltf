@@ -202,7 +202,9 @@ export function Buoy(props: IObjectProps) {
         {props.hovered ? props.hovered : "알루미늄 스마트 부표"}
       </Text>
 
-      <Description value={descripiton} group={props.desciption} />
+      {isMobile ? null : (
+        <Description value={descripiton} group={props.desciption} />
+      )}
     </React.Fragment>
   );
 }

@@ -3,10 +3,11 @@ import styled from "styled-components";
 
 const NavBar = styled.div`
   background-color: transparent;
-  position: absolute;
-  top: 2.5%;
-  z-index: 100;
   width: 100%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const NavLinkWrapper = styled.div`

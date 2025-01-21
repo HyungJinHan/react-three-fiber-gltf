@@ -259,7 +259,9 @@ export function DspBoard(props: IObjectProps) {
         {props.hovered ? props.hovered : "ODN-DSP 신호처리장치"}
       </Text>
 
-      <Description value={descripiton} group={props.desciption} />
+      {isMobile ? null : (
+        <Description value={descripiton} group={props.desciption} />
+      )}
     </React.Fragment>
   );
 }

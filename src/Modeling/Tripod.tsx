@@ -149,7 +149,9 @@ export function Tripod(props: IObjectProps) {
         {props.hovered ? props.hovered : "수질 계측 센서"}
       </Text>
 
-      <Description value={descripiton} group={props.desciption} />
+      {isMobile ? null : (
+        <Description value={descripiton} group={props.desciption} />
+      )}
     </React.Fragment>
   );
 }

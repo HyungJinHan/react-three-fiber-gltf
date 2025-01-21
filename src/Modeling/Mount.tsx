@@ -196,7 +196,9 @@ export function Mount(props: IObjectProps) {
         {props.hovered ? props.hovered : "해양 환경 계장(계측) 제어장치"}
       </Text>
 
-      <Description value={descripiton} group={props.desciption} />
+      {isMobile ? null : (
+        <Description value={descripiton} group={props.desciption} />
+      )}
     </React.Fragment>
   );
 }
