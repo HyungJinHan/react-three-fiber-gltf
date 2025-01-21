@@ -68,7 +68,10 @@ type MountProps = {
     hinge_back: THREE.Mesh;
     bolt: THREE.Mesh;
     bolt_inside: THREE.Mesh;
-    guard: THREE.Mesh;
+    guard_1: THREE.Mesh;
+    guard_2: THREE.Mesh;
+    guard_3: THREE.Mesh;
+    guard_4: THREE.Mesh;
     antenna_cover: THREE.Mesh;
     body_inside: THREE.Mesh;
     antenna: THREE.Mesh;

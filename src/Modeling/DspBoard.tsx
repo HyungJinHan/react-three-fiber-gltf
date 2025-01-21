@@ -13,6 +13,12 @@ const partMoveProps = {
   position: [0, 0.3, 0],
 };
 
+// 100BASE-T 이더넷 Lan 포트
+
+// 현재 사용중인 현장의 인터넷 랜선을 연결하여 100Mbit/s 속도로
+// 지연율을 저감시킨 IoT 통신을 지원합니다.
+// TCP/IP 프로토콜 및 보안성 강화의 기능 제공을 통해 안정적인 정보 공유를 제공합니다.
+
 // const modelingPath = "/modeling/buoy/animation/buoy-draco.glb";
 const modelingPath = "/modeling/dsp-board/dsp-board-draco.glb";
 
@@ -36,6 +42,8 @@ export function DspBoard(props: IObjectProps) {
         "12V~36v DC 전원 입력과 외부 장치 전원 인가를 위한 전원 출력을 함께 지원합니다. 3Wh 이하의 소비전력으로 스마트 부표에 탑재하여 다양한 방식으로 환경 측정을 지원하고 KC인증 및 다양한 시험 성적서를 확보하였습니다.",
       "SMA 광대역 안테나 입력단자":
         "고정밀 GPS 안테나 및 MIMO 4G 통신 안테나 단자를 지원함으로써 격오지 등 통신 음영지역에 IoT 솔루션의 적용이 가능하며, 수요자의 요청사항에 맞추어 통합형 안테나, 고감도 안테나 등 다양한 솔루션을 제공합니다.",
+      "100BASE-T 이더넷 Lan 포트":
+        "현재 사용중인 현장의 인터넷 랜선을 연결하여 100Mbit/s 속도로 지연율을 저감시킨 IoT 통신을 지원합니다. TCP/IP 프로토콜 및 보안성 강화의 기능 제공을 통해 안정적인 정보 공유를 제공합니다.",
     }[props.hovered] ??
     `${
       isMobile ? "터치를 통해" : "마우스를 올려서"
@@ -90,97 +98,120 @@ export function DspBoard(props: IObjectProps) {
                 props.hover,
                 "SMA 광대역 안테나 입력단자"
               )}>
-              <mesh
-                geometry={nodes.ant_1_1.geometry}
-                material={materials.white}
-                material-envMap={env}
-              />
-              <mesh
-                geometry={nodes.ant_1_2.geometry}
-                material={materials.ant}
-                material-envMap={env}
-              />
-              <mesh
-                geometry={nodes.ant_1_3.geometry}
-                material={materials.ant}
-              />
-              <mesh
-                geometry={nodes.ant_2_1.geometry}
-                material={materials.white}
-              />
-              <mesh
-                geometry={nodes.ant_2_2.geometry}
-                material={materials.ant}
-              />
-              <mesh
-                geometry={nodes.ant_3_1.geometry}
-                material={materials.ant}
-              />
-              <mesh
-                geometry={nodes.ant_3_2.geometry}
-                material={materials.ant}
-              />
-              <mesh
-                geometry={nodes.ant_3_3.geometry}
-                material={materials.white}
-              />
+              <group>
+                <mesh
+                  geometry={nodes.ant_1_1.geometry}
+                  material={materials.white}
+                  material-envMap={env}
+                />
+                <mesh
+                  geometry={nodes.ant_1_2.geometry}
+                  material={materials.ant}
+                  material-envMap={env}
+                />
+                <mesh
+                  geometry={nodes.ant_1_3.geometry}
+                  material={materials.ant}
+                />
+              </group>
+              <group>
+                <mesh
+                  geometry={nodes.ant_2_1.geometry}
+                  material={materials.white}
+                />
+                <mesh
+                  geometry={nodes.ant_2_2.geometry}
+                  material={materials.ant}
+                />
+              </group>
+              <group>
+                <mesh
+                  geometry={nodes.ant_3_1.geometry}
+                  material={materials.ant}
+                />
+                <mesh
+                  geometry={nodes.ant_3_2.geometry}
+                  material={materials.ant}
+                />
+                <mesh
+                  geometry={nodes.ant_3_3.geometry}
+                  material={materials.white}
+                />
+              </group>
             </Select>
-            <mesh
-              geometry={nodes.c_type_1_1.geometry}
-              material={materials.metal_silver}
-              material-envMap={env}
-            />
-            <mesh
-              geometry={nodes.c_type_1_2.geometry}
-              material={materials.black}
-            />
-            <mesh
-              geometry={nodes.c_type_2_1.geometry}
-              material={materials.metal_silver}
-            />
-            <mesh
-              geometry={nodes.c_type_2_2.geometry}
-              material={materials.black}
-            />
+            <group>
+              <mesh
+                geometry={nodes.c_type_1_1.geometry}
+                material={materials.metal_silver}
+                material-envMap={env}
+              />
+              <mesh
+                geometry={nodes.c_type_1_2.geometry}
+                material={materials.black}
+              />
+            </group>
+            <group>
+              <mesh
+                geometry={nodes.c_type_2_1.geometry}
+                material={materials.metal_silver}
+              />
+              <mesh
+                geometry={nodes.c_type_2_2.geometry}
+                material={materials.black}
+              />
+            </group>
+            <Select
+              {...usePointEvent(
+                props.hovered,
+                props.hover,
+                "100BASE-T 이더넷 Lan 포트"
+              )}>
+              <group>
+                <mesh
+                  geometry={nodes.ethernet_1_1.geometry}
+                  material={materials.metal_silver}
+                />
+                <mesh
+                  geometry={nodes.ethernet_1_2.geometry}
+                  material={materials.yellow}
+                />
+                <mesh
+                  geometry={nodes.ethernet_1_3.geometry}
+                  material={materials.green}
+                />
+                <mesh
+                  geometry={nodes.ethernet_1_4.geometry}
+                  material={materials.black}
+                />
+              </group>
+            </Select>
             <Select
               {...usePointEvent(
                 props.hovered,
                 props.hover,
                 "디지털 센싱 입출력 단자"
               )}>
-              <mesh
-                geometry={nodes.ethernet_1_1.geometry}
-                material={materials.metal_silver}
-              />
-              <mesh
-                geometry={nodes.ethernet_1_2.geometry}
-                material={materials.yellow}
-              />
-              <mesh
-                geometry={nodes.ethernet_1_3.geometry}
-                material={materials.green}
-              />
-              <mesh
-                geometry={nodes.ethernet_1_4.geometry}
-                material={materials.black}
-              />
-              <mesh
-                geometry={nodes.ethernet_2_1.geometry}
-                material={materials.metal_silver}
-              />
-              <mesh
-                geometry={nodes.ethernet_2_2.geometry}
-                material={materials.black}
-              />
+              <group>
+                <mesh
+                  geometry={nodes.ethernet_2_1.geometry}
+                  material={materials.metal_silver}
+                />
+                <mesh
+                  geometry={nodes.ethernet_2_2.geometry}
+                  material={materials.black}
+                />
+              </group>
+              <group>
+                <mesh
+                  geometry={nodes.ethernet_3_1.geometry}
+                  material={materials.metal_silver}
+                />
+                <mesh
+                  geometry={nodes.ethernet_3_2.geometry}
+                  material={materials.black}
+                />
+              </group>
             </Select>
-            <mesh
-              geometry={nodes.ethernet_3_1.geometry}
-              material={materials.metal_silver}
-            />
-            <mesh
-              geometry={nodes.ethernet_3_2.geometry}
-              material={materials.black}
-            />
           </group>
 
           <group>

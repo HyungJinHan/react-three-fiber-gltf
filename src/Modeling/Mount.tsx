@@ -123,17 +123,40 @@ export function Mount(props: IObjectProps) {
 
         <Select
           {...usePointEvent(props.hovered, props.hover, "부표 전장품 탑재부")}>
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.guard.geometry}
-            material={materials.aluminium}
-            material-envMap={env}
-          />
-          <mesh
-            geometry={nodes.antenna_cover.geometry}
-            material={materials.aluminium}
-          />
+          <group>
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.guard_1.geometry}
+              material={materials.aluminium}
+              material-envMap={env}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.guard_2.geometry}
+              material={materials.aluminium}
+              material-envMap={env}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.guard_3.geometry}
+              material={materials.aluminium}
+              material-envMap={env}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.guard_4.geometry}
+              material={materials.aluminium}
+              material-envMap={env}
+            />
+            <mesh
+              geometry={nodes.antenna_cover.geometry}
+              material={materials.aluminium}
+            />
+          </group>
         </Select>
 
         <Select

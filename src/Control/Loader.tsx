@@ -106,7 +106,7 @@ export const Loader = (props: IProps) => {
     dsp: {
       front: {
         modeling: {
-          scale: 0.012,
+          scale: 0.01,
           position: [1.3, -0.55, -0.5],
           rotation: [0, 2, 0],
         },
@@ -118,8 +118,8 @@ export const Loader = (props: IProps) => {
       },
       back: {
         modeling: {
-          scale: 0.012,
-          position: [1.9, -0.55, -0.8],
+          scale: 0.01,
+          position: [1.8, -0.55, -0.8],
           rotation: [0, 4.1, 0],
         },
         height: "100vh",
