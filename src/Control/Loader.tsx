@@ -98,7 +98,7 @@ export const Loader = (props: IProps) => {
       modeling: {
         // scale: 0.004,
         scale: 0.0048,
-        position: [1.5, -0.75, -0.1],
+        position: [1.5, -0.75, -0.3],
         rotation: [Math.PI, 0, Math.PI],
       },
       height: "100vh",
