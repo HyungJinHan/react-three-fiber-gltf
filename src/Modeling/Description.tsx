@@ -6,7 +6,7 @@ export const Description = (props: IDescriptionProps) => {
   return (
     <group {...props.group}>
       <Text
-        maxWidth={2.8}
+        maxWidth={isMobile ? 2.2 : 2.8}
         lineHeight={1.7}
         anchorY="top"
         textAlign={isMobile ? "center" : "left"}

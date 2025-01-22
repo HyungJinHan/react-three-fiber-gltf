@@ -11,22 +11,16 @@ import { Loader } from "./Loader";
 import Nav from "./Nav";
 
 const CanvasWrapper = styled.div`
-  display: flex;
   height: 100%;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  overflow-y: auto;
 `;
 
 const ModelingWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 35%;
-  width: 80%;
+  margin: auto;
+  height: ${isMobile ? "50%" : "35%"};
+  width: ${isMobile ? "90%" : "70%"};
   border-radius: 1rem;
   overflow: hidden;
-  margin-top: 2.5%;
+  margin-bottom: ${isMobile ? "10%" : "5%"};
 `;
 
 export const Canvas = () => {
@@ -35,8 +29,6 @@ export const Canvas = () => {
   const adjustFov = () => {
     let innerWidth = Math.floor(window.innerWidth / 100);
     let innerHeight = Math.floor(window.innerHeight / 100);
-
-    console.log(innerWidth);
 
     if (!isMobile) {
       if (20 < innerWidth) {
@@ -67,7 +59,7 @@ export const Canvas = () => {
       <Nav />
 
       {type.map((res) => (
-        <ModelingWrapper key={res}>
+        <ModelingWrapper>
           <FiberCanvas
             flat
             dpr={[1, 1.5]}
@@ -93,7 +85,7 @@ export const Canvas = () => {
               </Bvh>
               <mesh
                 rotation={[-Math.PI / 2, 0, 0]}
-                position={isMobile ? [0, -0.8, -0.5] : [0, -0.6, -0.5]}
+                position={isMobile ? [0, -1, -0.5] : [0, -0.6, -0.5]}
                 receiveShadow>
                 <circleGeometry args={[3.5, 100]} />
                 <shadowMaterial transparent opacity={1} />

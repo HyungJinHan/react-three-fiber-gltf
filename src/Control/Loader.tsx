@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Effects from "../Effects/Effects";
 import { IObjectProps } from "../interfaces";
 import { Buoy } from "../Modeling/Buoy";
@@ -15,6 +15,10 @@ interface IProps {
 
 export const Loader = (props: IProps) => {
   const [hovered, hover] = useState("");
+
+  useEffect(() => {
+    hover("");
+  }, [props.type]);
 
   const defaultProps = {
     desktop: {
@@ -56,8 +60,8 @@ export const Loader = (props: IProps) => {
         letterSpacing: -0.05,
       },
       desciption: {
-        scale: 1,
-        position: [0, 0.57, -1.2],
+        scale: 1.1,
+        position: [0, 0.5, -1.2],
         rotation: [0, 0, 0],
       },
     },
@@ -134,8 +138,8 @@ export const Loader = (props: IProps) => {
   const mobileModelingProps = {
     buoy: {
       modeling: {
-        scale: 0.0012,
-        position: [0, -0.7, -0.5],
+        scale: 0.0015,
+        position: [0, -0.9, -0.5],
         rotation: [0.1, Math.PI / 5, 0],
       },
       height: "100vh",
@@ -146,9 +150,9 @@ export const Loader = (props: IProps) => {
     },
     mount: {
       modeling: {
-        scale: 0.0028,
-        position: [-0.37, -0.77, 0.5],
-        rotation: [0.1, Math.PI / 8, 0],
+        scale: 0.0038,
+        position: [-0.7, -0.97, 0.5],
+        rotation: [0, Math.PI / 9, 0],
       },
       height: "100vh",
       width: "100%",
@@ -158,8 +162,8 @@ export const Loader = (props: IProps) => {
     },
     tripod: {
       modeling: {
-        scale: 0.0035,
-        position: [0.1, -0.92, -0.1],
+        scale: 0.004,
+        position: [0.1, -1.16, -0.1],
         rotation: [Math.PI, 0, Math.PI],
       },
       height: "100vh",
@@ -172,7 +176,7 @@ export const Loader = (props: IProps) => {
       front: {
         modeling: {
           scale: 0.009,
-          position: [0.1, -0.73, -0.5],
+          position: [0.1, -0.95, -0.7],
           rotation: [0, 2, 0],
         },
         height: "100vh",
@@ -184,7 +188,7 @@ export const Loader = (props: IProps) => {
       back: {
         modeling: {
           scale: 0.009,
-          position: [0.6, -0.73, -0.8],
+          position: [0.5, -0.95, -0.8],
           rotation: [0, 4.1, 0],
         },
         height: "100vh",
