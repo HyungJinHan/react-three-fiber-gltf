@@ -50,5 +50,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://rss.blog.naver.com"
+  "proxy": "https://rss.blog.naver.com",
+  "devDependencies": {
+    "http-proxy-middleware": "^3.0.3"
+  }
 }
