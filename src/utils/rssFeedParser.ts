@@ -6,7 +6,8 @@ export const getRssFeed = (
 
   // XMLHttpRequest 메서드와 대상 링크 설정
   const method = "GET";
-  const url = "/odnus.xml?atom=0.3";
+  const url = "/odnus?atom=0.3";
+
   // 요청 생성
   xhr.open(method, url);
   // xhr이 요청이 완료된 경우 결과를 생성

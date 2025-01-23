@@ -52,5 +52,6 @@
   },
   "devDependencies": {
     "http-proxy-middleware": "^3.0.3"
-  }
+  },
+  "proxy": "https://rss.blog.naver.com"
 }
