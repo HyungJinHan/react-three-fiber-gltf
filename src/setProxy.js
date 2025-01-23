@@ -6,7 +6,6 @@ module.exports = function (app) {
     createProxyMiddleware({
       target: "https://rss.blog.naver.com",
       changeOrigin: true,
-      pathRewrite: { "^/odnus.xml?atom=0.3": "/" },
     })
   );
 };
