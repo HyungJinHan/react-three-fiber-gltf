@@ -1,5 +1,27 @@
 import { useEffect, useState } from "react";
+import styled from "styled-components";
 import { getRssFeed } from "../utils/rssFeedParser";
+
+const Wrapper = styled.div`
+  flex-flow: wrap;
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  align-items: center;
+  margin: 0px auto;
+  gap: 20px;
+`;
+
+const TwoLineDesc = styled.p`
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: gray;
+  line-height: 1.8rem;
+`;
 
 const Feed = () => {
   const [feeds, setFeeds] = useState({
@@ -31,39 +53,34 @@ const Feed = () => {
             style={{
               overflow: "hidden",
             }}>
-            <a href={feeds.guid[i]} target="_blank" rel="noreferrer">
-              {feeds.title[i]}
-            </a>{" "}
-            | <span>{localeDateString}</span>
-            <p
+            <a
+              href={feeds.guid[i]}
+              target="_blank"
+              rel="noreferrer"
               style={{
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
-                wordBreak: "break-all",
-                width: "100%",
+                fontSize: "20px",
+                fontWeight: "bold",
               }}>
-              {feeds.description[i]}
-            </p>
+              {feeds.title[i]}
+            </a>
+            <span
+              style={{
+                fontSize: "15px",
+                fontWeight: "bold",
+                color: "gray",
+                marginLeft: "1.25rem",
+              }}>
+              {localeDateString}
+            </span>
+            <TwoLineDesc
+              dangerouslySetInnerHTML={{ __html: feeds.description[i] }}
+            />
           </div>
         </div>
       );
     }
 
-    return (
-      <div
-        style={{
-          flexDirection: "row",
-          display: "flex",
-          justifyContent: "space-around",
-          width: "80%",
-          flexWrap: "wrap",
-          alignItems: "center",
-          margin: "0 auto",
-        }}>
-        {result}
-      </div>
-    );
+    return <Wrapper>{result}</Wrapper>;
   };
 
   return (
