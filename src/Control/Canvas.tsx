@@ -9,12 +9,6 @@ import Loading from "../Effects/Loading";
 import { isMobile } from "../utils/isMobile";
 import { Loader } from "./Loader";
 
-const CanvasWrapper = styled.div`
-  height: 100%;
-  max-width: 172rem;
-  margin: 0 auto;
-`;
-
 const ModelingWrapper = styled.div`
   margin: auto;
   height: ${isMobile ? "50%" : "35%"};
