@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   gap: 20px;
 `;
 
-const TwoLineDesc = styled.p`
+const TwoLineDescription = styled.p`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -39,19 +39,26 @@ const Feed = () => {
     const result = [];
 
     for (let i = 0; i < feeds.title.length; i++) {
-      const date = new Date(feeds.pubDate[i]);
-      const localeDateString = new Date(date.getTime()).toLocaleDateString();
+      const pubDate = new Date(feeds.pubDate[i]);
+
+      const year = pubDate.getFullYear();
+      const month = (pubDate.getMonth() + 1).toString().padStart(2, "0");
+      const day = pubDate.getDate().toString().padStart(2, "0");
+
+      // const localeDateString = new Date(pubDate.getTime()).toLocaleDateString();
+      const localeDateString = `${year}.${month}.${day}`;
 
       result.push(
         <div
           key={i}
           style={{
-            display: "flex",
             width: "45%",
           }}>
           <div
             style={{
-              overflow: "hidden",
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "space-between",
             }}>
             <a
               href={feeds.guid[i]}
@@ -68,14 +75,13 @@ const Feed = () => {
                 fontSize: "15px",
                 fontWeight: "bold",
                 color: "gray",
-                marginLeft: "1.25rem",
               }}>
               {localeDateString}
             </span>
-            <TwoLineDesc
-              dangerouslySetInnerHTML={{ __html: feeds.description[i] }}
-            />
           </div>
+          <TwoLineDescription
+            dangerouslySetInnerHTML={{ __html: feeds.description[i] }}
+          />
         </div>
       );
     }
