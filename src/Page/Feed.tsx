@@ -7,7 +7,6 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
   width: 80%;
-  align-items: center;
   margin: 0px auto;
   gap: 20px;
 `;
@@ -48,6 +47,8 @@ const Feed = () => {
       // const localeDateString = new Date(pubDate.getTime()).toLocaleDateString();
       const localeDateString = `${year}.${month}.${day}`;
 
+      const splitTitle = feeds.title[i].split("/")[0];
+
       result.push(
         <div
           key={i}
@@ -68,7 +69,7 @@ const Feed = () => {
                 fontSize: "20px",
                 fontWeight: "bold",
               }}>
-              {feeds.title[i]}
+              {splitTitle}
             </a>
             <span
               style={{
