@@ -8,7 +8,6 @@ import Light from "../Effects/Light";
 import Loading from "../Effects/Loading";
 import { isMobile } from "../utils/isMobile";
 import { Loader } from "./Loader";
-import Nav from "./Nav";
 
 const CanvasWrapper = styled.div`
   height: 100%;
@@ -53,11 +52,9 @@ export const Canvas = () => {
       : ["dsp-board"];
 
   return (
-    <CanvasWrapper>
-      <Nav />
-
-      {type.map((res) => (
-        <ModelingWrapper>
+    <>
+      {type.map((res, index) => (
+        <ModelingWrapper key={index}>
           <FiberCanvas
             flat
             dpr={[1, 1.5]}
@@ -92,6 +89,6 @@ export const Canvas = () => {
           </FiberCanvas>
         </ModelingWrapper>
       ))}
-    </CanvasWrapper>
+    </>
   );
 };

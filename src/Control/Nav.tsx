@@ -8,6 +8,7 @@ const NavBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  max-width: 172rem;
 `;
 
 const NavLinkWrapper = styled.div`
