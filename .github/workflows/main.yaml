@@ -13,8 +13,8 @@ jobs:
       - name: Checkout source code.
         uses: actions/checkout@v3
 
-      # - name: Install Dependencies
-      #   run: npm install
+      - name: Install Dependencies
+        run: npm install
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -22,14 +22,6 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-
-      # - name: aws-ssm-to-env
-      #   uses: eliasjcjunior/aws-ssm-parameters-action@main
-      #   with:
-      #     recursive: true
-      #     split-env: true
-      #     upper-case: true
-      #     paths: /dev/REACT_APP_CORS_URL
 
       - name: Get SSM Parameters - Key Value Pairs
         uses: Armadillidiid/ssm-get-parameters-action@v1
@@ -39,24 +31,16 @@ jobs:
             S3_BUCKET_ID=/dev/S3_BUCKET_ID
             DISTRIBUTION_ID=/dev/DISTRIBUTION_ID
 
-      - name: log envs
+      - name: Build
         env:
           REACT_APP_CORS_URL: ${{ env.REACT_APP_CORS_URL }}
+          S3_BUCKET_ID: ${{ env.S3_BUCKET_ID }}
+          DISTRIBUTION_ID: ${{ env.DISTRIBUTION_ID }}
         run: |
-          echo $REACT_APP_CORS_URL
+          npm run build
 
-      # - name: Build
-      #   env:
-      #     REACT_APP_CORS_URL: ${{ env.REACT_APP_CORS_URL }}
-      #   run: |
-      #     npm run build
+      - name: Deploy to S3
+        run: aws s3 sync build/ s3://${{ env.S3_BUCKET_ID }} --delete
 
-      # - name: Debug show secret value
-      #   run: |
-      #     echo ${{ env.DEV_TEST }}
-
-      # - name: Deploy to S3
-      #   run: aws s3 sync build/ s3://${{ secrets.S3_BUCKET_ID }} --delete
-
-      # - name: Invalidate CloudFront Cache
-      #   run: aws cloudfront create-invalidation --distribution-id ${{ secrets.DISTRIBUTION_ID }} --paths "/*"
+      - name: Invalidate CloudFront Cache
+        run: aws cloudfront create-invalidation --distribution-id ${{ env.DISTRIBUTION_ID }} --paths "/*"
