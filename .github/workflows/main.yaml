@@ -38,7 +38,7 @@ jobs:
 
       - name: Debug show secret value
         run: |
-          echo ${{ env.DEV_TEST.REACT_APP_CORS_URL }}
+          echo ${{ env.DEV_TEST }}
 
       # - name: Deploy to S3
       #   run: aws s3 sync build/ s3://${{ steps.aws-secret.outputs.secretValue2 }} --delete
