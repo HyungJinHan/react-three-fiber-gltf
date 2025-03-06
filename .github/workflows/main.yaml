@@ -32,10 +32,12 @@ jobs:
 
       - name: Build
         env:
-          REACT_APP_CORS_URL: ${{ steps.aws-secret.outputs.secretValue }}
+          REACT_APP_CORS_URL: ${{ steps.aws-secret.outputs.secretValue1 }}
+          REACT_APP_TEST_URL: ${{ steps.aws-secret.outputs.secretValue2 }}
         run: |
           npm run build
-          echo "Secret value: $MY_SECRET"
+          echo "Secret value: $REACT_APP_CORS_URL"
+          echo "Secret value: $REACT_APP_TEST_URL"
 
       - name: Debug show secret value
         run: |
