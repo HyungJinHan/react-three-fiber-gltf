@@ -33,18 +33,15 @@ jobs:
       - name: Build
         env:
           REACT_APP_CORS_URL: ${{ steps.aws-secret.outputs.secretValue1 }}
-          REACT_APP_TEST_URL: ${{ steps.aws-secret.outputs.secretValue2 }}
         run: |
           npm run build
-          echo "Secret value: $REACT_APP_CORS_URL"
-          echo "Secret value: $REACT_APP_TEST_URL"
 
-      - name: Debug show secret value
-        run: |
-          echo ${{ env.MY_ENV_VAR }}
+      # - name: Debug show secret value
+      #   run: |
+      #     echo ${{ env.MY_ENV_VAR }}
 
-      # - name: Deploy to S3
-      #   run: aws s3 sync build/ s3://${{ secrets.S3_BUCKET_ID }} --delete
+      - name: Deploy to S3
+        run: aws s3 sync build/ s3://${{ steps.aws-secret.outputs.secretValue2 }} --delete
 
-      # - name: Invalidate CloudFront Cache
-      #   run: aws cloudfront create-invalidation --distribution-id ${{ secrets.DISTRIBUTION_ID }} --paths "/*"
+      - name: Invalidate CloudFront Cache
+        run: aws cloudfront create-invalidation --distribution-id ${{ steps.aws-secret.outputs.secretValue3 }} --paths "/*"
