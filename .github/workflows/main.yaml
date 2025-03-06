@@ -13,8 +13,8 @@ jobs:
       - name: Checkout source code.
         uses: actions/checkout@v3
 
-      - name: Install Dependencies
-        run: npm install
+      # - name: Install Dependencies
+      #   run: npm install
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -28,7 +28,7 @@ jobs:
         uses: aws-actions/aws-secretsmanager-get-secrets@v2
         with:
           secret-ids: |
-            MY_ENV_VAR, dev/test
+            ,dev/test
 
       # - name: Build
       #   env:
@@ -38,7 +38,7 @@ jobs:
 
       - name: Debug show secret value
         run: |
-          echo ${{ env.MY_ENV_VAR_REACT_APP_CORS_URL }}
+          echo ${{ env.MY_ENV_VAR }}
 
       # - name: Deploy to S3
       #   run: aws s3 sync build/ s3://${{ steps.aws-secret.outputs.secretValue2 }} --delete
