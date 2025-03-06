@@ -23,23 +23,19 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      # - name: Get Secrets by Name and by ARN
-      #   id: aws-secret
-      #   uses: aws-actions/aws-secretsmanager-get-secrets@v2
-      #   with:
-      #     secret-ids: |
-      #       ,dev/test
-
       - name: aws-ssm-to-env
         uses: eliasjcjunior/aws-ssm-parameters-action@main
         with:
+          recursive: true
+          split-env: true
+          upper-case: true
           paths: /dev/REACT_APP_CORS_URL
 
       - name: log envs
         env:
           REACT_APP_CORS_URL: ${{ env.REACT_APP_CORS_URL }}
         run: |
-          echo $REACT_APP_CORS_URL
+          echo ${{ env.REACT_APP_CORS_URL }}
 
       # - name: Build
       #   env:
