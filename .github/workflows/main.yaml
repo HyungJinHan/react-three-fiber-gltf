@@ -16,18 +16,32 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Build
-        run: npm run build
-
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Deploy to S3
-        run: aws s3 sync build/ s3://${{ secrets.S3_BUCKET_ID }} --delete
+      - name: Get Secrets by Name and by ARN
+        id: aws-secret
+        uses: aws-actions/aws-secretsmanager-get-secrets@v2
+        with:
+          secret-ids: |
+            dev/test
 
-      - name: Invalidate CloudFront Cache
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.DISTRIBUTION_ID }} --paths "/*"
+      - name: Build
+        run: npm run build
+        env:
+          REACT_APP_CORS_URL: ${{ steps.aws-secret.outputs }}
+
+      - name: Create .env file
+        run: |
+          touch .env   
+          echo "REACT_APP_CORS_URL=${{ steps.aws-secret.outputs}}" >> .env
+
+      # - name: Deploy to S3
+      #   run: aws s3 sync build/ s3://${{ secrets.S3_BUCKET_ID }} --delete
+
+      # - name: Invalidate CloudFront Cache
+      #   run: aws cloudfront create-invalidation --distribution-id ${{ secrets.DISTRIBUTION_ID }} --paths "/*"

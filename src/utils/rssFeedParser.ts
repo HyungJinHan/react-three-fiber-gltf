@@ -18,7 +18,7 @@ export const getRssFeed = (
   // XMLHttpRequest 메서드와 대상 링크 설정
   const method = "POST";
   // require -> "url=<your_url>"
-  const cors_api = "https://arcgis.api.odn.us/api";
+  const cors_api = process.env.REACT_APP_CORS_URL as string;
 
   xhr.open(method, cors_api);
 
