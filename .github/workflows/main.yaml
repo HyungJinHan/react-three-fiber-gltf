@@ -38,7 +38,7 @@ jobs:
 
       - name: Debug show secret value
         run: |
-          echo ${{ env.MY_ENV_VAR }}
+          echo ${{ env.DEV_TEST }}
 
       # - name: Deploy to S3
       #   run: aws s3 sync build/ s3://${{ steps.aws-secret.outputs.secretValue2 }} --delete
