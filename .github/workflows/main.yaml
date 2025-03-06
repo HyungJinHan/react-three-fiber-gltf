@@ -17,19 +17,25 @@ jobs:
       #   run: npm install
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: aws-ssm-to-env
-        uses: eliasjcjunior/aws-ssm-parameters-action@main
+      # - name: aws-ssm-to-env
+      #   uses: eliasjcjunior/aws-ssm-parameters-action@main
+      #   with:
+      #     recursive: true
+      #     split-env: true
+      #     upper-case: true
+      #     paths: /dev/REACT_APP_CORS_URL
+
+      - name: Get SSM Parameters - Key Value Pairs
+        uses: Armadillidiid/ssm-get-parameters-action@v1
         with:
-          recursive: true
-          split-env: true
-          upper-case: true
-          paths: /dev/REACT_APP_CORS_URL
+          secret: |
+            REACT_APP_CORS_URL=/dev/REACT_APP_CORS_URL
 
       - name: log envs
         env:
