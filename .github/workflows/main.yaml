@@ -28,17 +28,18 @@ jobs:
         uses: aws-actions/aws-secretsmanager-get-secrets@v2
         with:
           secret-ids: |
-            dev/test
+            MY_ENV_VAR, dev/test
 
       - name: Build
-        run: npm run build
         env:
-          REACT_APP_CORS_URL: ${{ steps.aws-secret.outputs }}
-
-      - name: Create .env file
+          REACT_APP_CORS_URL: ${{ steps.aws-secret.outputs.secretValue }}
         run: |
-          touch .env   
-          echo "${{ steps.aws-secret.outputs }}" >> .env
+          npm run build
+          echo "Secret value: $MY_SECRET"
+
+      - name: Debug show secret value
+        run: |
+          echo ${{ env.MY_ENV_VAR }}
 
       # - name: Deploy to S3
       #   run: aws s3 sync build/ s3://${{ secrets.S3_BUCKET_ID }} --delete
