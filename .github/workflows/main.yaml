@@ -23,25 +23,32 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Get Secrets by Name and by ARN
-        id: aws-secret
-        uses: aws-actions/aws-secretsmanager-get-secrets@v2
+      # - name: Get Secrets by Name and by ARN
+      #   id: aws-secret
+      #   uses: aws-actions/aws-secretsmanager-get-secrets@v2
+      #   with:
+      #     secret-ids: |
+      #       ,dev/test
+
+      - name: Awesome Client Secret - SSM Parameter
+        uses: stephenbawks/aws-ssm-parameter@v1.0.0
         with:
-          secret-ids: |
-            ,dev/test
+          name: /dev/REACT_APP_CORS_URL
+          value: ${{ secrets.REACT_APP_CORS_URL }}
+          description: Super Secret - Do Not Tell Anyone
 
-      # - name: Build
-      #   env:
-      #     REACT_APP_CORS_URL: ${{ env.REACT_APP_CORS_URL }}
-      #   run: |
-      #     npm run build
-
-      - name: Debug show secret value
+      - name: Build
+        env:
+          REACT_APP_CORS_URL: ${{ env.REACT_APP_CORS_URL }}
         run: |
-          echo ${{ env.DEV_TEST }}
+          npm run build
 
-      # - name: Deploy to S3
-      #   run: aws s3 sync build/ s3://${{ steps.aws-secret.outputs.secretValue2 }} --delete
+      # - name: Debug show secret value
+      #   run: |
+      #     echo ${{ env.DEV_TEST }}
 
-      # - name: Invalidate CloudFront Cache
-      #   run: aws cloudfront create-invalidation --distribution-id ${{ steps.aws-secret.outputs.secretValue3 }} --paths "/*"
+      - name: Deploy to S3
+        run: aws s3 sync build/ s3://${{ secrets.S3_BUCKET_ID }} --delete
+
+      - name: Invalidate CloudFront Cache
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.DISTRIBUTION_ID }} --paths "/*"
