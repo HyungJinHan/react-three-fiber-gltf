@@ -36,12 +36,14 @@ jobs:
         with:
           secret: |
             REACT_APP_CORS_URL=/dev/REACT_APP_CORS_URL
+            S3_BUCKET_ID=/dev/S3_BUCKET_ID
+            DISTRIBUTION_ID=/dev/DISTRIBUTION_ID
 
       - name: log envs
         env:
           REACT_APP_CORS_URL: ${{ env.REACT_APP_CORS_URL }}
         run: |
-          echo ${{ env.REACT_APP_CORS_URL }}
+          echo $REACT_APP_CORS_URL
 
       # - name: Build
       #   env:
