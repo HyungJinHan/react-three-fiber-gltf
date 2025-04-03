@@ -3,14 +3,14 @@ name: master
 on:
   push:
     branches:
-      - main # master 브랜치에서 push 이벤트가 일어났을 때 실행
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source code.
+      - name: Checkout source code
         uses: actions/checkout@v3
 
       - name: Install Dependencies
@@ -23,21 +23,20 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Get SSM Parameters - Key Value Pairs
-        uses: Armadillidiid/ssm-get-parameters-action@v1
-        with:
-          secret: |
-            REACT_APP_CORS_URL=/dev/REACT_APP_CORS_URL
-            S3_BUCKET_ID=/dev/S3_BUCKET_ID
-            DISTRIBUTION_ID=/dev/DISTRIBUTION_ID
+      - name: Get SSM Parameters
+        id: ssm
+        run: |
+          REACT_APP_CORS_URL=$(aws ssm get-parameter --name "/dev/REACT_APP_CORS_URL" --with-decryption --query "Parameter.Value" --output text)
+          S3_BUCKET_ID=$(aws ssm get-parameter --name "/dev/S3_BUCKET_ID" --with-decryption --query "Parameter.Value" --output text)
+          DISTRIBUTION_ID=$(aws ssm get-parameter --name "/dev/DISTRIBUTION_ID" --with-decryption --query "Parameter.Value" --output text)
+          echo "REACT_APP_CORS_URL=$REACT_APP_CORS_URL" >> $GITHUB_ENV
+          echo "S3_BUCKET_ID=$S3_BUCKET_ID" >> $GITHUB_ENV
+          echo "DISTRIBUTION_ID=$DISTRIBUTION_ID" >> $GITHUB_ENV
 
       - name: Build
+        run: npm run build
         env:
           REACT_APP_CORS_URL: ${{ env.REACT_APP_CORS_URL }}
-          S3_BUCKET_ID: ${{ env.S3_BUCKET_ID }}
-          DISTRIBUTION_ID: ${{ env.DISTRIBUTION_ID }}
-        run: |
-          npm run build
 
       - name: Deploy to S3
         run: aws s3 sync build/ s3://${{ env.S3_BUCKET_ID }} --delete
