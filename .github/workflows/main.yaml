@@ -26,9 +26,9 @@ jobs:
       - name: Get SSM Parameters
         id: ssm
         run: |
-          REACT_APP_CORS_URL=$(aws ssm get-parameter --name "/dev/REACT_APP_CORS_URL" --with-decryption --query "Parameter.Value" --output text)
-          S3_BUCKET_ID=$(aws ssm get-parameter --name "/dev/S3_BUCKET_ID" --with-decryption --query "Parameter.Value" --output text)
-          DISTRIBUTION_ID=$(aws ssm get-parameter --name "/dev/DISTRIBUTION_ID" --with-decryption --query "Parameter.Value" --output text)
+          REACT_APP_CORS_URL=$(aws ssm get-parameter --name "/test/hhj/REACT_APP_CORS_URL" --with-decryption --query "Parameter.Value" --output text)
+          S3_BUCKET_ID=$(aws ssm get-parameter --name "/test/hhj/S3_BUCKET_ID" --with-decryption --query "Parameter.Value" --output text)
+          DISTRIBUTION_ID=$(aws ssm get-parameter --name "/test/hhj/DISTRIBUTION_ID" --with-decryption --query "Parameter.Value" --output text)
           echo "REACT_APP_CORS_URL=$REACT_APP_CORS_URL" >> $GITHUB_ENV
           echo "S3_BUCKET_ID=$S3_BUCKET_ID" >> $GITHUB_ENV
           echo "DISTRIBUTION_ID=$DISTRIBUTION_ID" >> $GITHUB_ENV
