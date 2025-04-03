@@ -39,7 +39,11 @@ jobs:
           REACT_APP_CORS_URL: ${{ env.REACT_APP_CORS_URL }}
 
       - name: Deploy to S3
+        env:
+          S3_BUCKET_ID: ${{ env.S3_BUCKET_ID }}
         run: aws s3 sync build/ s3://${{ env.S3_BUCKET_ID }} --delete
 
       - name: Invalidate CloudFront Cache
+        env:
+          DISTRIBUTION_ID: ${{ env.DISTRIBUTION_ID }}
         run: aws cloudfront create-invalidation --distribution-id ${{ env.DISTRIBUTION_ID }} --paths "/*"
